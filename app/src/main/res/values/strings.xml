@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Meals-CA</string>
+    <string name="app_name">SA_CA_2026</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="home_page_title">Home Page</string>
+    <string name="meals_page_title">Meals Page</string>
+    <string name="settings_page_title">Settings Page</string>
 </resources>

@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Meals-CA"
+rootProject.name = "SA_CA_2026"
 include(":app")
