@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SA_CA_2026</string>
+    <string name="home_page_title">Leathanach Baile</string>
+    <string name="home_page_title_button">Baile</string>
+
+
+    <string name="meals_page_title">Leathanach Béilí</string>
+    <string name="meals_page_title_button">Béilí</string>
+    <string name="meals_search_bar">Serchó</string>
+    <string name="meals_filter">Filter</string>
+
+    <string name="settings_page_title">Leathanach Socruithe</string>
+    <string name="settings_page_title_button">Socruithe</string>
+    <string name="dark_mode_text">Mód Dorcha</string>
+    <string name="dark_mode_icon_desc">Deilbhín Mód Dorcha</string>
+    <string name="settings_preferences_title">Sainroghanna</string>
+    <string name="language_text">Teangacha</string>
+    <string name="languages_icon_desc">Cnaipe Teangacha</string>
+</resources>

@@ -29,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        replaceFragment(new HomeFragment());
+        // Only set HomeFragment if first creation
+        if (savedInstanceState == null) {
+            replaceFragment(new HomeFragment());
+        }
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-
             if (item.getItemId() == R.id.home) {
                 replaceFragment(new HomeFragment());
                 return true;
@@ -43,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new SettingsFragment());
                 return true;
             }
-
-
             return true;
         });
     }

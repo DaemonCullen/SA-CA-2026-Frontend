@@ -7,11 +7,151 @@
     tools:context=".SettingsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_page_title"
-        android:textSize="26sp"
-        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical">
+
+        <!-- Title Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:background="@color/background"
+            android:gravity="center"
+            android:elevation="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_page_title"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:textColor="@color/text"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <!-- Appearance -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_preferences_title"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginBottom="2dp"/>
+                <LinearLayout
+                    android:background="@drawable/settings_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!-- Dark Mode Switch -->
+                    <RelativeLayout
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/dark_mode_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:id="@+id/dark_mode_icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="10dp"
+                            android:background="@drawable/round_dark_mode"
+                            app:srcCompat="@drawable/rounded_moon_stars_24"
+                            android:contentDescription="@string/dark_mode_icon_desc"
+                            app:tint="@color/white"
+                            android:layout_margin="4dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/dark_mode_icon"
+                            android:layout_toStartOf="@id/dark_mode_switch"
+                            android:layout_centerVertical="true"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="@string/dark_mode_text"
+                            android:textColor="@color/text"
+                            android:textStyle="bold"
+                            android:layout_marginStart="20dp"/>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/dark_mode_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:switchMinWidth="50dp"
+                            android:theme="@style/darkModeSwitch"
+                            android:clickable="false"
+                            android:focusable="false"/>
+                    </RelativeLayout>
+                    <!-- Language -->
+                    <RelativeLayout
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/language_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:id="@+id/languages_icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="10dp"
+                            android:background="@drawable/round_languages"
+                            app:srcCompat="@drawable/baseline_language_24"
+                            android:contentDescription="@string/languages_icon_desc"
+                            app:tint="@color/white"
+                            android:layout_margin="4dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/languages_icon"
+                            android:layout_centerVertical="true"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="@string/language_text"
+                            android:textColor="@color/text"
+                            android:textStyle="bold"
+                            android:layout_marginStart="20dp"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
 
 </FrameLayout>

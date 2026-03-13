@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Home"
+    <item android:title="@string/home_page_title_button"
         android:icon="@drawable/baseline_home_24"
         android:id="@+id/home"/>
-    <item android:title="Meals"
+    <item android:title="@string/meals_page_title_button"
         android:icon="@drawable/outline_award_meal_24"
         android:id="@+id/meals"/>
-    <item android:title="Settings"
+    <item android:title="@string/settings_page_title_button"
         android:icon="@drawable/settings_24dp_e3e3e3_fill0_wght400_grad0_opsz24"
         android:id="@+id/settings"/>
 </menu>

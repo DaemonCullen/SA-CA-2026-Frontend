@@ -5,6 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:clipChildren="false"
+    android:clipToPadding="false"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -22,6 +25,8 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="10dp"
+        app:itemBackground="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
