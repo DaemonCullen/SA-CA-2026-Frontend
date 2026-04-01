@@ -2,23 +2,92 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="12dp">
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@android:color/white"
+    android:layout_marginBottom="8dp">
 
+    <!-- Day Header -->
     <TextView
         android:id="@+id/textViewDay"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:paddingBottom="8dp"
         android:text="Monday" />
 
-    <TextView
-        android:id="@+id/textViewMealName"
-        android:layout_width="0dp"
+    <!-- Breakfast -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:text="Meal Name" />
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:text="Breakfast" />
+
+        <TextView
+            android:id="@+id/textViewBreakfast"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:text="Meal Name" />
+    </LinearLayout>
+
+    <!-- Lunch -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:text="Lunch" />
+
+        <TextView
+            android:id="@+id/textViewLunch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:text="Meal Name" />
+    </LinearLayout>
+
+    <!-- Dinner -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:text="Dinner" />
+
+        <TextView
+            android:id="@+id/textViewDinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:text="Meal Name" />
+    </LinearLayout>
 
 </LinearLayout>

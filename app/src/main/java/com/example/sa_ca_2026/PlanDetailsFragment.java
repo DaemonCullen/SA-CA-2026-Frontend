@@ -89,8 +89,12 @@ public class PlanDetailsFragment extends Fragment {
         weeklyMeals.clear();
 
         for (String day : days) {
-            Meal randomMeal = allMeals.get(random.nextInt(allMeals.size()));
-            weeklyMeals.add(new WeeklyMeal(day, randomMeal.name));
+            // Get 3 random meals for each day (breakfast, lunch, dinner)
+            Meal breakfast = allMeals.get(random.nextInt(allMeals.size()));
+            Meal lunch = allMeals.get(random.nextInt(allMeals.size()));
+            Meal dinner = allMeals.get(random.nextInt(allMeals.size()));
+            
+            weeklyMeals.add(new WeeklyMeal(day, breakfast.name, lunch.name, dinner.name));
         }
         adapter.notifyDataSetChanged();
     }
@@ -98,11 +102,15 @@ public class PlanDetailsFragment extends Fragment {
     // Helper classes
     static class WeeklyMeal {
         String day;
-        String mealName;
+        String breakfast;
+        String lunch;
+        String dinner;
 
-        WeeklyMeal(String day, String mealName) {
+        WeeklyMeal(String day, String breakfast, String lunch, String dinner) {
             this.day = day;
-            this.mealName = mealName;
+            this.breakfast = breakfast;
+            this.lunch = lunch;
+            this.dinner = dinner;
         }
     }
 
@@ -124,7 +132,9 @@ public class PlanDetailsFragment extends Fragment {
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             WeeklyMeal item = meals.get(position);
             holder.dayText.setText(item.day);
-            holder.mealText.setText(item.mealName);
+            holder.breakfastText.setText(item.breakfast);
+            holder.lunchText.setText(item.lunch);
+            holder.dinnerText.setText(item.dinner);
         }
 
         @Override
@@ -133,11 +143,13 @@ public class PlanDetailsFragment extends Fragment {
         }
 
         static class ViewHolder extends RecyclerView.ViewHolder {
-            TextView dayText, mealText;
+            TextView dayText, breakfastText, lunchText, dinnerText;
             ViewHolder(View itemView) {
                 super(itemView);
                 dayText = itemView.findViewById(R.id.textViewDay);
-                mealText = itemView.findViewById(R.id.textViewMealName);
+                breakfastText = itemView.findViewById(R.id.textViewBreakfast);
+                lunchText = itemView.findViewById(R.id.textViewLunch);
+                dinnerText = itemView.findViewById(R.id.textViewDinner);
             }
         }
     }
