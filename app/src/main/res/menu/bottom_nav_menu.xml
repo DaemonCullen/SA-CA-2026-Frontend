@@ -7,6 +7,10 @@
     <item android:title="@string/meals_page_title_button"
         android:icon="@drawable/outline_award_meal_24"
         android:id="@+id/meals"/>
+    <item
+        android:id="@+id/action_plans"
+        android:icon="@drawable/baseline_language_24"
+        android:title="@string/plans" />
     <item android:title="@string/settings_page_title_button"
         android:icon="@drawable/settings_24dp_e3e3e3_fill0_wght400_grad0_opsz24"
         android:id="@+id/settings"/>

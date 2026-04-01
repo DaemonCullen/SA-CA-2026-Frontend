@@ -35,25 +35,28 @@ public class MainActivity extends AppCompatActivity {
         }
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.home) {
+            int id = item.getItemId();
+            if (id == R.id.home) {
                 replaceFragment(new HomeFragment());
                 return true;
-            } else if (item.getItemId() == R.id.meals) {
+            } else if (id == R.id.meals) {
                 replaceFragment(new MealsFragment());
                 return true;
-            } else if (item.getItemId() == R.id.settings) {
+            } else if (id == R.id.settings) {
                 replaceFragment(new SettingsFragment());
                 return true;
+            } else if (id == R.id.action_plans) { // Changed to match XML ID
+                replaceFragment(new PlansFragment());
+                return true;
             }
-            return true;
+            return false;
         });
     }
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
-
     }
 }

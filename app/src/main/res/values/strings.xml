@@ -9,7 +9,6 @@
     <string name="meals_page_title_button">Meals</string>
     <string name="meals_search_bar">Search</string>
     <string name="meals_filter">Filter</string>
-
     <!-- Settings Page -->
     <string name="settings_page_title">Settings</string>
     <string name="settings_page_title_button">Settings</string>
@@ -18,4 +17,9 @@
     <string name="settings_preferences_title">Preferences</string>
     <string name="language_text">Languages</string>
     <string name="languages_icon_desc">Languages Button</string>
+
+    <!-- Add meal_list and plans strings -->
+    <string name="meal_list">Meal List</string>
+    <string name="plans">Plans</string>
 </resources>
+
