@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/detailMealName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="10dp"
+            android:text="Meal Name" />
+
+        <TextView
+            android:id="@+id/detailCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#E0E0E0"
+            android:padding="5dp"
+            android:textSize="14sp"
+            android:layout_marginBottom="20dp"
+            android:text="Category" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="5"
+            android:layout_marginBottom="20dp">
+
+            <TextView android:text="Rating:" android:textStyle="bold" android:layout_marginEnd="10dp"/>
+            <TextView android:id="@+id/detailRating" android:text="0.0"/>
+
+            <TextView android:text="Difficulty:" android:textStyle="bold" android:layout_marginEnd="10dp"/>
+            <TextView android:id="@+id/detailDifficulty" android:text="Easy"/>
+
+            <TextView android:text="Prep Time:" android:textStyle="bold" android:layout_marginEnd="10dp"/>
+            <TextView android:id="@+id/detailPrepTime" android:text="0 mins"/>
+
+            <TextView android:text="Cook Time:" android:textStyle="bold" android:layout_marginEnd="10dp"/>
+            <TextView android:id="@+id/detailCookTime" android:text="0 mins"/>
+
+            <TextView android:text="Servings:" android:textStyle="bold" android:layout_marginEnd="10dp"/>
+            <TextView android:id="@+id/detailServings" android:text="0"/>
+        </GridLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nutritional Information"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:layout_marginBottom="20dp">
+
+            <TextView android:text="Calories:" android:textStyle="bold" android:layout_marginEnd="10dp"/>
+            <TextView android:id="@+id/detailCalories" android:text="0 kcal"/>
+
+            <TextView android:text="Protein:" android:textStyle="bold" android:layout_marginEnd="10dp"/>
+            <TextView android:id="@+id/detailProtein" android:text="0g"/>
+
+            <TextView android:text="Total Fat:" android:textStyle="bold" android:layout_marginEnd="10dp"/>
+            <TextView android:id="@+id/detailTotalFat" android:text="0g"/>
+        </GridLayout>
+
+        <Button
+            android:id="@+id/btnBackToMeals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back to List"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+</ScrollView>

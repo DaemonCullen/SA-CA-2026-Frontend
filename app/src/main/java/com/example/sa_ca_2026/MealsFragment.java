@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +32,8 @@ public class MealsFragment extends Fragment {
     Button filterButton;
     ArrayAdapter<String> arrayAdapter;
 
-    ArrayList<String> allMeals = new ArrayList<>();
-    ArrayList<String> displayedMeals = new ArrayList<>();
+    ArrayList<Meal> allMealsList = new ArrayList<>();
+    ArrayList<String> displayedMealNames = new ArrayList<>();
 
     public MealsFragment() {
     }
@@ -46,34 +47,32 @@ public class MealsFragment extends Fragment {
         String query = searchView.getQuery().toString().toLowerCase().trim();
         String sortChoice = sortSpinner.getSelectedItem() != null ? sortSpinner.getSelectedItem().toString() : "A-Z";
 
-        displayedMeals.clear();
+        displayedMealNames.clear();
 
-        for (String meal : allMeals) {
-            if (meal.toLowerCase().contains(query)) {
-                displayedMeals.add(meal);
+        for (Meal meal : allMealsList) {
+            if (meal.name.toLowerCase().contains(query)) {
+                displayedMealNames.add(meal.name);
             }
         }
 
-        Collections.sort(displayedMeals, String.CASE_INSENSITIVE_ORDER);
+        Collections.sort(displayedMealNames, String.CASE_INSENSITIVE_ORDER);
 
         if (sortChoice.equals("Z-A")) {
-            Collections.reverse(displayedMeals);
+            Collections.reverse(displayedMealNames);
         }
 
         arrayAdapter.notifyDataSetChanged();
     }
 
     private void loadMealsFromApi() {
-        MealsApi api = RetrofitClient.getClient().create(MealsApi.class); // Create the class from the model
+        MealsApi api = RetrofitClient.getClient().create(MealsApi.class);
         
         api.getMeals().enqueue(new Callback<List<Meal>>() {
             @Override
             public void onResponse(@NonNull Call<List<Meal>> call, @NonNull Response<List<Meal>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    allMeals.clear();
-                    for (Meal meal : response.body()) {
-                        allMeals.add(meal.name);
-                    }
+                    allMealsList.clear();
+                    allMealsList.addAll(response.body());
                     updateMealList();
                 } else {
                     Toast.makeText(getContext(), "Failed to get meals: " + response.code(), Toast.LENGTH_SHORT).show();
@@ -82,9 +81,6 @@ public class MealsFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<Meal>> call, @NonNull Throwable t) {
-                allMeals.clear();
-                allMeals.add("Error: " + t.getMessage());
-                updateMealList();
                 Toast.makeText(getContext(), "Network Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
@@ -106,13 +102,28 @@ public class MealsFragment extends Fragment {
 
         arrayAdapter = new ArrayAdapter<>(
                 requireContext(),
-                R.id.mealName != 0 ? R.layout.meal_list_item : android.R.layout.simple_list_item_1,
-                displayedMeals
+                android.R.layout.simple_list_item_1,
+                displayedMealNames
         );
-        // Note: If you use a custom layout like R.layout.meal_list_item, 
-        // ensure you pass the TextView ID correctly. 
-        // For now, I'm setting a fallback to a standard list item if layout is missing.
         listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener((parent, view1, position, id) -> {
+            String selectedName = displayedMealNames.get(position);
+            Meal selectedMeal = null;
+            for (Meal m : allMealsList) {
+                if (m.name.equals(selectedName)) {
+                    selectedMeal = m;
+                    break;
+                }
+            }
+
+            if (selectedMeal != null) {
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, MealDetailFragment.newInstance(selectedMeal.id));
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         String[] sortOptions = {"A-Z", "Z-A"};
         ArrayAdapter<String> sortAdapter = new ArrayAdapter<>(
@@ -153,7 +164,6 @@ public class MealsFragment extends Fragment {
             new androidx.appcompat.app.AlertDialog.Builder(requireContext())
                     .setTitle("Choose filter")
                     .setItems(filterOptions, (dialog, which) -> {
-                        // Filter logic here
                     })
                     .show();
         });
