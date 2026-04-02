@@ -64,7 +64,7 @@ public class MealsFragment extends Fragment {
     }
 
     private void loadMealsFromApi() {
-        MealsApi api = RetrofitClient.getClient().create(MealsApi.class);
+        MealsApi api = RetrofitClient.getClient().create(MealsApi.class); // Create the class from the model
         
         api.getMeals().enqueue(new Callback<List<Meal>>() {
             @Override
