@@ -48,7 +48,7 @@ public interface MealsApi {
     Call<List<Meal>> getMealsByProtein(@Path("protein") double protein);
 
     // Fixed path variable to match the URL placeholder
-    @GET("api/meals/search/protein/{minProtein}")
+    @GET("api/meals/search/minprotein/{minProtein}")
     Call<List<Meal>> getMealsByMinProtein(@Path("minProtein") double minProtein);
 
     @POST("api/meals")

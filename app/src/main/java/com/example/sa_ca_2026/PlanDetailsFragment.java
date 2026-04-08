@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -39,7 +40,6 @@ public class PlanDetailsFragment extends Fragment {
         // Updated to pass default values for filterType and filterValue
         return newInstance(planName, "none", -1.0);
     }
-
     public static PlanDetailsFragment newInstance(String planName, String filterType, double filterValue) {
         PlanDetailsFragment fragment = new PlanDetailsFragment();
         Bundle args = new Bundle();
@@ -71,7 +71,12 @@ public class PlanDetailsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewWeeklyMeals);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         
-        adapter = new WeeklyMealsAdapter(weeklyMeals);
+        adapter = new WeeklyMealsAdapter(weeklyMeals, meal -> {
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.frame_layout, MealDetailFragment.newInstance(meal.id))
+                    .addToBackStack(null)
+                    .commit();
+        });
         recyclerView.setAdapter(adapter);
 
         loadMealsAndGeneratePlan();
@@ -114,6 +119,17 @@ public class PlanDetailsFragment extends Fragment {
         });
     }
 
+    private List<Meal> buildPool(List<Meal> source, int needed, Random random) {
+        List<Meal> pool = new ArrayList<>(source);
+        Collections.shuffle(pool, random);
+        while (pool.size() < needed) {
+            List<Meal> extra = new ArrayList<>(source);
+            Collections.shuffle(extra, random);
+            pool.addAll(extra);
+        }
+        return pool;
+    }
+
     private void generateWeeklyPlan(List<Meal> allMeals) {
         if (allMeals.isEmpty()) return;
 
@@ -131,20 +147,20 @@ public class PlanDetailsFragment extends Fragment {
             }
         }
 
-        // Fall back to all meals if a category has no results
-        if (breakfastMeals.isEmpty()) breakfastMeals = allMeals;
-        if (lunchMeals.isEmpty()) lunchMeals = allMeals;
-        if (dinnerMeals.isEmpty()) dinnerMeals = allMeals;
-
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         Random random = new Random();
-        weeklyMeals.clear();
 
-        for (String day : days) {
-            Meal breakfast = breakfastMeals.get(random.nextInt(breakfastMeals.size()));
-            Meal lunch = lunchMeals.get(random.nextInt(lunchMeals.size()));
-            Meal dinner = dinnerMeals.get(random.nextInt(dinnerMeals.size()));
-            weeklyMeals.add(new WeeklyMeal(day, breakfast.name, lunch.name, dinner.name));
+        List<Meal> breakfastPool = breakfastMeals.isEmpty() ? null : buildPool(breakfastMeals, days.length, random);
+        List<Meal> lunchPool     = lunchMeals.isEmpty()     ? null : buildPool(lunchMeals,     days.length, random);
+        List<Meal> dinnerPool    = dinnerMeals.isEmpty()    ? null : buildPool(dinnerMeals,    days.length, random);
+
+        weeklyMeals.clear();
+        for (int i = 0; i < days.length; i++) {
+            weeklyMeals.add(new WeeklyMeal(
+                    days[i],
+                    breakfastPool != null ? breakfastPool.get(i) : null,
+                    lunchPool     != null ? lunchPool.get(i)     : null,
+                    dinnerPool    != null ? dinnerPool.get(i)    : null));
         }
         adapter.notifyDataSetChanged();
     }
@@ -152,11 +168,11 @@ public class PlanDetailsFragment extends Fragment {
     // Helper classes
     static class WeeklyMeal {
         String day;
-        String breakfast;
-        String lunch;
-        String dinner;
+        Meal breakfast;
+        Meal lunch;
+        Meal dinner;
 
-        WeeklyMeal(String day, String breakfast, String lunch, String dinner) {
+        WeeklyMeal(String day, Meal breakfast, Meal lunch, Meal dinner) {
             this.day = day;
             this.breakfast = breakfast;
             this.lunch = lunch;
@@ -164,11 +180,17 @@ public class PlanDetailsFragment extends Fragment {
         }
     }
 
+    interface OnMealClickListener {
+        void onMealClick(Meal meal);
+    }
+
     static class WeeklyMealsAdapter extends RecyclerView.Adapter<WeeklyMealsAdapter.ViewHolder> {
         private final List<WeeklyMeal> meals;
+        private final OnMealClickListener listener;
 
-        WeeklyMealsAdapter(List<WeeklyMeal> meals) {
+        WeeklyMealsAdapter(List<WeeklyMeal> meals, OnMealClickListener listener) {
             this.meals = meals;
+            this.listener = listener;
         }
 
         @NonNull
@@ -182,9 +204,19 @@ public class PlanDetailsFragment extends Fragment {
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             WeeklyMeal item = meals.get(position);
             holder.dayText.setText(item.day);
-            holder.breakfastText.setText(item.breakfast);
-            holder.lunchText.setText(item.lunch);
-            holder.dinnerText.setText(item.dinner);
+            bindMealSlot(holder.breakfastText, item.breakfast, "No breakfast meal matches");
+            bindMealSlot(holder.lunchText,     item.lunch,     "No lunch meal matches");
+            bindMealSlot(holder.dinnerText,    item.dinner,    "No dinner meal matches");
+        }
+
+        private void bindMealSlot(TextView view, Meal meal, String placeholder) {
+            if (meal != null) {
+                view.setText(meal.name);
+                view.setOnClickListener(v -> listener.onMealClick(meal));
+            } else {
+                view.setText(placeholder);
+                view.setOnClickListener(null);
+            }
         }
 
         @Override
