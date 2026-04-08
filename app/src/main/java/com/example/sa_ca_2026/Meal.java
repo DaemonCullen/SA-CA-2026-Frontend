@@ -13,4 +13,5 @@ public class Meal {
     public int calories;
     public double protein;
     public String category;
+
 }

@@ -24,14 +24,28 @@ import retrofit2.Response;
 public class PlanDetailsFragment extends Fragment {
 
     private String planName;
+    private String filterType; 
+    private double filterValue; 
     private RecyclerView recyclerView;
     private WeeklyMealsAdapter adapter;
     private List<WeeklyMeal> weeklyMeals = new ArrayList<>();
 
+
+    private static final String ARG_PLAN_NAME = "plan_name";
+    private static final String ARG_FILTER_TYPE = "filter_type";
+    private static final String ARG_FILTER_VALUE = "filter_value";
+
     public static PlanDetailsFragment newInstance(String planName) {
+        // Updated to pass default values for filterType and filterValue
+        return newInstance(planName, "none", -1.0);
+    }
+
+    public static PlanDetailsFragment newInstance(String planName, String filterType, double filterValue) {
         PlanDetailsFragment fragment = new PlanDetailsFragment();
         Bundle args = new Bundle();
-        args.putString("plan_name", planName);
+        args.putString(ARG_PLAN_NAME, planName);
+        args.putString(ARG_FILTER_TYPE, filterType);
+        args.putDouble(ARG_FILTER_VALUE, filterValue);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,9 +54,12 @@ public class PlanDetailsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            planName = getArguments().getString("plan_name");
+            planName = getArguments().getString(ARG_PLAN_NAME);
+            filterType = getArguments().getString(ARG_FILTER_TYPE);
+            filterValue = getArguments().getDouble(ARG_FILTER_VALUE, -1);
         }
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,13 +81,29 @@ public class PlanDetailsFragment extends Fragment {
 
     private void loadMealsAndGeneratePlan() {
         MealsApi api = RetrofitClient.getClient().create(MealsApi.class);
-        api.getMeals().enqueue(new Callback<List<Meal>>() {
+        Call<List<Meal>> call;
+
+        // Use the filterType passed from PlansFragment to decide the API call
+        if ("protein".equals(filterType) && filterValue >= 0) {
+            call = api.getMealsByMinProtein(filterValue);
+        } else if ("calories".equals(filterType) && filterValue >= 0) {
+            call = api.getMealsByCalories(filterValue);
+        } else {
+            call = api.getMeals();
+        }
+
+        call.enqueue(new Callback<List<Meal>>() {
             @Override
             public void onResponse(@NonNull Call<List<Meal>> call, @NonNull Response<List<Meal>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    generateWeeklyPlan(response.body());
+                    List<Meal> meals = response.body();
+                    if (meals.isEmpty()) {
+                        Toast.makeText(getContext(), "No meals found for this plan's criteria", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    generateWeeklyPlan(meals);
                 } else {
-                    Toast.makeText(getContext(), "Failed to load meals for plan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Failed to load meals", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -84,16 +117,33 @@ public class PlanDetailsFragment extends Fragment {
     private void generateWeeklyPlan(List<Meal> allMeals) {
         if (allMeals.isEmpty()) return;
 
+        List<Meal> breakfastMeals = new ArrayList<>();
+        List<Meal> lunchMeals = new ArrayList<>();
+        List<Meal> dinnerMeals = new ArrayList<>();
+
+        for (Meal meal : allMeals) {
+            if ("Breakfast".equalsIgnoreCase(meal.category)) {
+                breakfastMeals.add(meal);
+            } else if ("Lunch".equalsIgnoreCase(meal.category)) {
+                lunchMeals.add(meal);
+            } else if ("Dinner".equalsIgnoreCase(meal.category)) {
+                dinnerMeals.add(meal);
+            }
+        }
+
+        // Fall back to all meals if a category has no results
+        if (breakfastMeals.isEmpty()) breakfastMeals = allMeals;
+        if (lunchMeals.isEmpty()) lunchMeals = allMeals;
+        if (dinnerMeals.isEmpty()) dinnerMeals = allMeals;
+
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         Random random = new Random();
         weeklyMeals.clear();
 
         for (String day : days) {
-            // Get 3 random meals for each day (breakfast, lunch, dinner)
-            Meal breakfast = allMeals.get(random.nextInt(allMeals.size()));
-            Meal lunch = allMeals.get(random.nextInt(allMeals.size()));
-            Meal dinner = allMeals.get(random.nextInt(allMeals.size()));
-            
+            Meal breakfast = breakfastMeals.get(random.nextInt(breakfastMeals.size()));
+            Meal lunch = lunchMeals.get(random.nextInt(lunchMeals.size()));
+            Meal dinner = dinnerMeals.get(random.nextInt(dinnerMeals.size()));
             weeklyMeals.add(new WeeklyMeal(day, breakfast.name, lunch.name, dinner.name));
         }
         adapter.notifyDataSetChanged();

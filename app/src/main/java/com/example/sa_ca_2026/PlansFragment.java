@@ -2,29 +2,31 @@ package com.example.sa_ca_2026;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlansFragment extends Fragment {
 
+
+
+
     private RecyclerView listViewPlans;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_plans, container, false);
     }
 
@@ -40,13 +42,15 @@ public class PlansFragment extends Fragment {
         plans.add("Health Plan");
 
         PlansAdapter adapter = new PlansAdapter(plans, planName -> {
-            // Open the detail fragment when a plan is clicked
-            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_layout, PlanDetailsFragment.newInstance(planName));
-            transaction.addToBackStack(null);
-            transaction.commit();
+            if (planName.equals("Muscle Building Plan")) {
+                showInputDialog(planName, "protein", "Minimum Protein (g)");
+            } else if (planName.equals("Fat Loss Plan")) {
+                showInputDialog(planName, "calories", "Maximum Calories");
+            } else {
+                navigateToPlanDetails(planName, "none", -1);
+            }
         });
-        
+
         listViewPlans.setLayoutManager(new LinearLayoutManager(getContext()));
         listViewPlans.setAdapter(adapter);
 
@@ -69,12 +73,35 @@ public class PlansFragment extends Fragment {
         });
     }
 
-    // Interface for click handling
+    private void showInputDialog(String planName, String type, String title) {
+        EditText input = new EditText(getContext());
+        input.setHint("e.g. 30");
+        input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+        new AlertDialog.Builder(getContext())
+                .setTitle(title)
+                .setMessage("Enter the " + title.toLowerCase() + " for this plan:")
+                .setView(input)
+                .setPositiveButton("Generate", (dialog, which) -> {
+                    String raw = input.getText().toString().trim();
+                    double val = raw.isEmpty() ? 0 : Double.parseDouble(raw);
+                    navigateToPlanDetails(planName, type, val);
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void navigateToPlanDetails(String planName, String filterType, double filterValue) {
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_layout, PlanDetailsFragment.newInstance(planName, filterType, filterValue));
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     public interface OnPlanClickListener {
         void onPlanClick(String planName);
     }
 
-    // Updated Adapter class
     static class PlansAdapter extends RecyclerView.Adapter<PlansAdapter.PlansViewHolder> {
         private final List<String> plans;
         private final OnPlanClickListener listener;
@@ -104,7 +131,7 @@ public class PlansFragment extends Fragment {
         }
 
         static class PlansViewHolder extends RecyclerView.ViewHolder {
-            TextView textViewPlan;
+            android.widget.TextView textViewPlan;
             PlansViewHolder(View itemView) {
                 super(itemView);
                 textViewPlan = itemView.findViewById(android.R.id.text1);
