@@ -1,12 +1,20 @@
 <resources>
     <string name="app_name">SA_CA_2026</string>
-    <!--  TODO: Remove or change this placeholder text  -->
+    <!--  Home Page  -->
     <string name="home_page_title">Home</string>
     <string name="home_page_title_button">Home</string>
+    <string name="home_welcome">Welcome Back!</string>
+    <string name="home_welcome_message">Ready to eat healthy today?</string>
+    <string name="home_browse_meals">Browse Meals</string>
+    <string name="home_meal_plans">Meal Plans</string>
+    <string name="home_settings">Settings</string>
+    <string name="home_browse_meals_desc">Discover new recipes and nutrition info</string>
+    <string name="home_meal_plans_desc">View your weekly schedule and goals</string>
+    <string name="home_settings_desc">Language, dark mode, and profile</string>
     <!--  Meals Page  -->
     <string name="meals_page_title">Meals</string>
     <string name="meals_page_title_button">Meals</string>
-    <string name="meals_search_bar">Search</string>
+    <string name="meals_search_bar">Search Meals</string>
     <string name="meals_filter">Filter</string>
     <string name="meals_back_button">Back</string>
     <string name="meals_addNewMeal">Add New Meal</string>

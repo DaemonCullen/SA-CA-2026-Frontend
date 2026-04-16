@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--  Home Page  -->
     <string name="app_name">SA_CA_2026</string>
     <string name="home_page_title">Leathanach Baile</string>
     <string name="home_page_title_button">Baile</string>
+    <string name="home_welcome">Fáilte ar ais!</string>
+    <string name="home_welcome_message">Réidh le hithe go sláintiúil inniu?</string>
+    <string name="home_browse_meals">Brabhsáil Béilí</string>
+    <string name="home_meal_plans">Pleananna Béile</string>
+    <string name="home_settings">Socruithe</string>
+    <string name="home_browse_meals_desc">Faigh oidis nua agus eolas cothaithe</string>
+    <string name="home_meal_plans_desc">Féach ar do sceideal seachtainiúil agus do spriocanna</string>
+    <string name="home_settings_desc">Teanga, mód dorcha, agus próifíl</string>
     <!--  Meals Page  -->
     <string name="meals_page_title">Leathanach Béilí</string>
     <string name="meals_page_title_button">Béilí</string>
     <string name="meals_search_bar">Serchó</string>
     <string name="meals_filter">Scagaire</string>
     <string name="meals_back_button">Ar ais</string>
-    <string name="meals_addNewMeal">Add New Meal</string>
+    <string name="meals_addNewMeal">Cuir Béile Nua Leis</string>
     <!--  Meals Page (Filter)  -->
     <string name="meals_filter_chooseFilter">Roghnaigh scagaire</string>
     <string name="meals_filter_noFilter">Gan scagaire</string>
@@ -36,5 +45,5 @@
     <string name="language_text">Teangacha</string>
     <string name="languages_icon_desc">Cnaipe Teangacha</string>
     <!--  Add meal_list and plans strings  -->
-    <string name="meal_list">Meal List</string>
+    <string name="meal_list">Liosta Béilí</string>
 </resources>

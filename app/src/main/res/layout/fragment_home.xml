@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome Back!"
+            android:text="@string/home_welcome"
             android:textSize="28sp"
             android:textStyle="bold"
             android:textColor="@color/text"
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ready to eat healthy today?"
+            android:text="@string/home_welcome_message"
             android:textSize="16sp"
             android:textColor="@color/text"
             android:layout_marginBottom="32dp" />
@@ -52,7 +52,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Browse Meals"
+                    android:text="@string/home_browse_meals"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/text" />
@@ -60,7 +60,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Discover new recipes and nutrition info"
+                    android:text="@string/home_browse_meals_desc"
                     android:textSize="14sp"
                     android:textColor="@color/text"
                     android:layout_marginTop="4dp" />
@@ -89,7 +89,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Meal Plans"
+                    android:text="@string/home_meal_plans"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/text" />
@@ -97,7 +97,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="View your weekly schedule and goals"
+                    android:text="@string/home_meal_plans_desc"
                     android:textSize="14sp"
                     android:textColor="@color/text"
                     android:layout_marginTop="4dp" />
@@ -126,7 +126,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Settings"
+                    android:text="@string/home_settings"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/text" />
@@ -134,7 +134,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Language, dark mode, and profile"
+                    android:text="@string/home_settings_desc"
                     android:textSize="14sp"
                     android:textColor="@color/text"
                     android:layout_marginTop="4dp" />

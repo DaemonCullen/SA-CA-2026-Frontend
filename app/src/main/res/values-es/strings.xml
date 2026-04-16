@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SA_CA_2026</string>
+    <!--  Home Page  -->
     <string name="home_page_title">Página de Inicio</string>
     <string name="home_page_title_button">Inicio</string>
+    <string name="home_welcome">¡Bienvenido de nuevo!</string>
+    <string name="home_welcome_message">¿Listo para comer saludable hoy?</string>
+    <string name="home_browse_meals">Explorar comidas</string>
+    <string name="home_meal_plans">Planes de comidas</string>
+    <string name="home_settings">Configuración</string>
+    <string name="home_browse_meals_desc">Descubre nuevas recetas e información nutricional</string>
+    <string name="home_meal_plans_desc">Consulta tu horario semanal y tus objetivos</string>
+    <string name="home_settings_desc">Idioma, modo oscuro y perfil</string>
     <!--  Meals Page  -->
     <string name="meals_page_title">Página de Comidas</string>
     <string name="meals_page_title_button">Comidas</string>
     <string name="meals_search_bar">Sercho</string>
     <string name="meals_filter">filtrar</string>
     <string name="meals_back_button">Atrás</string>
-    <string name="meals_addNewMeal">Add New Meal</string>
+    <string name="meals_addNewMeal">Añadir nueva comida</string>
     <!--  Meals Page (Filter)  -->
     <string name="meals_filter_chooseFilter">Elegir filtro</string>
     <string name="meals_filter_noFilter">Sin filtro</string>
@@ -36,5 +45,5 @@
     <string name="language_text">Idiomas</string>
     <string name="languages_icon_desc">Botón de Idiomas</string>
     <!--  Add meal_list and plans strings  -->
-    <string name="meal_list">Meal List</string>
+    <string name="meal_list">Lista de comidas</string>
 </resources>

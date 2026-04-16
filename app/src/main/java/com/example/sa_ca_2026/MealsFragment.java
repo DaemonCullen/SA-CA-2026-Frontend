@@ -250,7 +250,7 @@ public class MealsFragment extends Fragment {
         });
 
         new AlertDialog.Builder(requireContext())
-                .setTitle("Add New Meal")
+                .setTitle(getString(R.string.meals_addNewMeal))
                 .setView(dialogView)
                 .setNegativeButton("Cancel", null)
                 .setPositiveButton("Save", (dialog, which) -> {
@@ -349,7 +349,7 @@ public class MealsFragment extends Fragment {
         filterButton = view.findViewById(R.id.filterButton);
 
         // Search setup
-        searchView.setQueryHint("Search meals");
+        searchView.setQueryHint(getString(R.string.meals_search_bar));
         searchView.setIconifiedByDefault(false);
 
         // List adapter setup
