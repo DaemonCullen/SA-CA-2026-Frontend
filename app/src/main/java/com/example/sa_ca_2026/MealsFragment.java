@@ -15,6 +15,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView;
 import android.widget.Toast;
+import android.widget.EditText;
+import android.widget.RatingBar;
+import android.widget.SeekBar;
+
+import android.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -169,6 +174,144 @@ public class MealsFragment extends Fragment {
     // ===================
     // Again guess
     // ===================
+    private void showAddMealDialog() {
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_meal, null);
+
+        EditText editMealName = dialogView.findViewById(R.id.editMealName);
+        Spinner editMealCategory = dialogView.findViewById(R.id.editMealCategory);
+        Spinner editMealDifficulty = dialogView.findViewById(R.id.editMealDifficulty);
+        RatingBar editMealRating = dialogView.findViewById(R.id.editMealRating);
+        SeekBar editMealPrepTime = dialogView.findViewById(R.id.editMealPrepTime);
+        SeekBar editMealCookTime = dialogView.findViewById(R.id.editMealCookTime);
+        SeekBar editMealServings = dialogView.findViewById(R.id.editMealServings);
+        EditText editMealCalories = dialogView.findViewById(R.id.editMealCalories);
+        EditText editMealProtein = dialogView.findViewById(R.id.editMealProtein);
+        EditText editMealTotalFat = dialogView.findViewById(R.id.editMealTotalFat);
+
+        TextView textPrepTime = dialogView.findViewById(R.id.textPrepTime);
+        TextView textCookTime = dialogView.findViewById(R.id.textCookTime);
+        TextView textServings = dialogView.findViewById(R.id.textServings);
+
+        String[] categoryOptions = {"Breakfast", "Lunch", "Dinner"};
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                categoryOptions
+        );
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        editMealCategory.setAdapter(categoryAdapter);
+
+        String[] difficultyOptions = {"Easy", "Medium", "Hard"};
+        ArrayAdapter<String> difficultyAdapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                difficultyOptions
+        );
+        difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        editMealDifficulty.setAdapter(difficultyAdapter);
+
+        editMealPrepTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textPrepTime.setText("Prep Time: " + progress + " mins");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) { }
+        });
+
+        editMealCookTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textCookTime.setText("Cook Time: " + progress + " mins");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) { }
+        });
+
+        editMealServings.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textServings.setText("Servings: " + (progress + 1));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) { }
+        });
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Add New Meal")
+                .setView(dialogView)
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Save", (dialog, which) -> {
+                    try {
+                        String name = editMealName.getText().toString().trim();
+                        String category = editMealCategory.getSelectedItem().toString();
+                        String difficulty = editMealDifficulty.getSelectedItem().toString();
+
+                        double rating = editMealRating.getRating();
+                        int prepTime = editMealPrepTime.getProgress();
+                        int cookTime = editMealCookTime.getProgress();
+                        int servings = editMealServings.getProgress() + 1;
+                        int calories = Integer.parseInt(editMealCalories.getText().toString().trim());
+                        double protein = Double.parseDouble(editMealProtein.getText().toString().trim());
+                        double totalFat = Double.parseDouble(editMealTotalFat.getText().toString().trim());
+
+                        if (name.isEmpty()) {
+                            Toast.makeText(requireContext(), "Please fill in the meal name", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        Meal newMeal = new Meal();
+                        newMeal.name = name;
+                        newMeal.category = category;
+                        newMeal.difficulty = difficulty;
+                        newMeal.rating = rating;
+                        newMeal.prepTime = prepTime;
+                        newMeal.cookTime = cookTime;
+                        newMeal.servings = servings;
+                        newMeal.calories = calories;
+                        newMeal.protein = protein;
+                        newMeal.totalFat = totalFat;
+
+                        createMealInApi(newMeal);
+
+                    } catch (Exception e) {
+                        Toast.makeText(requireContext(), "Please enter valid values in every field", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .show();
+    }
+    private void createMealInApi(Meal newMeal) {
+        MealsApi api = RetrofitClient.getClient().create(MealsApi.class);
+
+        api.createMeal(newMeal).enqueue(new Callback<Meal>() {
+            @Override
+            public void onResponse(@NonNull Call<Meal> call, @NonNull Response<Meal> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(requireContext(), "Meal added successfully", Toast.LENGTH_SHORT).show();
+                    loadMealsFromApi(); // refresh list
+                } else {
+                    Toast.makeText(requireContext(), "Failed to add meal: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Meal> call, @NonNull Throwable t) {
+                Toast.makeText(requireContext(), "Network Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
     private void loadMealsFromApi() {
         MealsApi api = RetrofitClient.getClient().create(MealsApi.class);
         
@@ -215,12 +358,32 @@ public class MealsFragment extends Fragment {
                 android.R.layout.simple_list_item_1,
                 displayedMealNames
         );
+
+        // Inflate footer layout
+        View footerView = inflater.inflate(R.layout.list_add_meal, listView, false);
+
+        // Find footer button
+        Button addMealButton = footerView.findViewById(R.id.addMealButton);
+
+        // Add footer to ListView
+        listView.addFooterView(footerView);
+
+        // Set adapter after footer is added
         listView.setAdapter(arrayAdapter);
+
+        // Footer button click
+        addMealButton.setOnClickListener(v -> showAddMealDialog());
 
         // Makes list items clickable (MealDetailFragment)
         listView.setOnItemClickListener((parent, view1, position, id) -> {
+            // Ignore footer clicks
+            if (position >= displayedMealNames.size()) {
+                return;
+            }
+
             String selectedName = displayedMealNames.get(position);
             Meal selectedMeal = null;
+
             for (Meal m : allMealsList) {
                 if (m.name.equals(selectedName)) {
                     selectedMeal = m;

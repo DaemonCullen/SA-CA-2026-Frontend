@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Meal Name -->
+        <EditText
+            android:id="@+id/editMealName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Meal Name"
+            android:inputType="textCapWords" />
+
+        <!-- Category -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Category" />
+
+        <Spinner
+            android:id="@+id/editMealCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Difficulty -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Difficulty" />
+
+        <Spinner
+            android:id="@+id/editMealDifficulty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Rating -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Rating" />
+
+        <RatingBar
+            android:id="@+id/editMealRating"
+            style="?android:attr/ratingBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:isIndicator="false" />
+
+        <!-- Prep Time -->
+        <TextView
+            android:id="@+id/textPrepTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Prep Time: 15 mins" />
+
+        <SeekBar
+            android:id="@+id/editMealPrepTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="120"
+            android:progress="15" />
+
+        <!-- Cook Time -->
+        <TextView
+            android:id="@+id/textCookTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Cook Time: 30 mins" />
+
+        <SeekBar
+            android:id="@+id/editMealCookTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="180"
+            android:progress="30" />
+
+        <!-- Servings -->
+        <TextView
+            android:id="@+id/textServings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Servings: 2" />
+
+        <SeekBar
+            android:id="@+id/editMealServings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="9"
+            android:progress="1" />
+
+        <!-- Calories -->
+        <EditText
+            android:id="@+id/editMealCalories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Calories"
+            android:inputType="numberDecimal" />
+
+        <!-- Protein -->
+        <EditText
+            android:id="@+id/editMealProtein"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Protein"
+            android:inputType="numberDecimal" />
+
+        <!-- Total Fat -->
+        <EditText
+            android:id="@+id/editMealTotalFat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Total Fat"
+            android:inputType="numberDecimal" />
+
+
+    </LinearLayout>
+</ScrollView>

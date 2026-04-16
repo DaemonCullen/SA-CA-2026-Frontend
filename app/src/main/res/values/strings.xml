@@ -1,15 +1,33 @@
 <resources>
     <string name="app_name">SA_CA_2026</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!--  TODO: Remove or change this placeholder text  -->
     <string name="home_page_title">Home</string>
     <string name="home_page_title_button">Home</string>
-
-    <!-- Meals Page -->
+    <!--  Meals Page  -->
     <string name="meals_page_title">Meals</string>
     <string name="meals_page_title_button">Meals</string>
     <string name="meals_search_bar">Search</string>
     <string name="meals_filter">Filter</string>
-    <!-- Settings Page -->
+    <string name="meals_back_button">Back</string>
+    <string name="meals_addNewMeal">Add New Meal</string>
+    <!--  Meals Page (Filter)  -->
+    <string name="meals_filter_chooseFilter">Choose Filter</string>
+    <string name="meals_filter_noFilter">No Filter</string>
+    <string name="meals_filter_category">Category</string>
+    <string name="meals_filter_breakfast">Breakfast</string>
+    <string name="meals_filter_lunch">Lunch</string>
+    <string name="meals_filter_dinner">Dinner</string>
+    <string name="meals_filter_difficulty">Difficulty</string>
+    <string name="meals_filter_easy">Easy</string>
+    <string name="meals_filter_medium">Medium</string>
+    <string name="meals_filter_hard">Hard</string>
+    <string name="meals_filter_Other">Other</string>
+    <string name="meals_filter_protein">Protein >= 20g</string>
+    <string name="meals_filter_calories">Calories &lt;= 500</string>
+    <!--  Plans Page  -->
+    <string name="plans_page_title">Plans</string>
+    <string name="plans_page_create_plan">Create Plan</string>
+    <!--  Settings Page  -->
     <string name="settings_page_title">Settings</string>
     <string name="settings_page_title_button">Settings</string>
     <string name="dark_mode_text">Dark Mode</string>
@@ -17,9 +35,7 @@
     <string name="settings_preferences_title">Preferences</string>
     <string name="language_text">Languages</string>
     <string name="languages_icon_desc">Languages Button</string>
-
-    <!-- Add meal_list and plans strings -->
+    <!--  Add meal_list and plans strings  -->
     <string name="meal_list">Meal List</string>
-    <string name="plans">Plans</string>
 </resources>
 

@@ -71,6 +71,9 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
+        android:fillViewport="true"
+        android:overScrollMode="never"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -91,7 +94,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:background="@color/card_background">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -99,11 +103,28 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rating" android:textSize="12sp" android:textColor="#888"/>
-                        <TextView android:id="@+id/detailRating" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4.5" android:textStyle="bold" android:textColor="#222"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rating"
+                            android:textColor="@color/text"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/detailRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4.5"
+                            android:textColor="@color/text"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
-                    <View android:layout_width="1dp" android:layout_height="24dp" android:background="#EEE" android:layout_gravity="center"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:background="#EEE" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -111,11 +132,28 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Prep" android:textSize="12sp" android:textColor="#888"/>
-                        <TextView android:id="@+id/detailPrepTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="15m" android:textStyle="bold" android:textColor="#222"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Prep"
+                            android:textColor="@color/text"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/detailPrepTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="15m"
+                            android:textColor="@color/text"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
-                    <View android:layout_width="1dp" android:layout_height="24dp" android:background="#EEE" android:layout_gravity="center"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:background="#EEE" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -123,8 +161,21 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cook" android:textSize="12sp" android:textColor="#888"/>
-                        <TextView android:id="@+id/detailCookTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="30m" android:textStyle="bold" android:textColor="#222"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cook"
+                            android:textColor="@color/text"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/detailCookTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30m"
+                            android:textColor="@color/text"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -134,10 +185,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Details"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
+                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -150,13 +201,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:background="@color/card_background">
 
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Difficulty" android:textStyle="bold" android:textSize="14sp"/>
-                    <TextView android:id="@+id/detailDifficulty" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Medium" android:layout_marginBottom="12dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Difficulty"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Servings" android:textStyle="bold" android:textSize="14sp"/>
-                    <TextView android:id="@+id/detailServings" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4 people"/>
+                    <TextView
+                        android:id="@+id/detailDifficulty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:text="Medium" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Servings"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/detailServings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4 people" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -165,10 +238,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Nutritional Facts"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
+                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -181,33 +254,97 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:columnCount="3"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:background="@color/card_background">
 
-                    <LinearLayout android:layout_columnWeight="1" android:orientation="vertical" android:gravity="center">
-                        <TextView android:id="@+id/detailCalories" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="450" android:textSize="16sp" android:textStyle="bold" android:textColor="?attr/colorPrimary"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="kcal" android:textSize="12sp"/>
+                    <LinearLayout
+                        android:layout_columnWeight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/detailCalories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="450"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="kcal"
+                            android:textSize="12sp"
+                            android:textColor="@color/text"/>
                     </LinearLayout>
 
-                    <LinearLayout android:layout_columnWeight="1" android:orientation="vertical" android:gravity="center">
-                        <TextView android:id="@+id/detailProtein" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25g" android:textSize="16sp" android:textStyle="bold" android:textColor="#4CAF50"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Protein" android:textSize="12sp"/>
+                    <LinearLayout
+                        android:layout_columnWeight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/detailProtein"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="25g"
+                            android:textColor="#4CAF50"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Protein"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
-                    <LinearLayout android:layout_columnWeight="1" android:orientation="vertical" android:gravity="center">
-                        <TextView android:id="@+id/detailTotalFat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12g" android:textSize="16sp" android:textStyle="bold" android:textColor="#F44336"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fat" android:textSize="12sp"/>
+                    <LinearLayout
+                        android:layout_columnWeight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/detailTotalFat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12g"
+                            android:textColor="#F44336"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fat"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                 </GridLayout>
             </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBackToMeals"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Back to Explorer"
-                app:cornerRadius="12dp" />
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnDeleteMeal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:text="Delete" />
+
+                <Button
+                    android:id="@+id/btnEditMeal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Edit" />
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
