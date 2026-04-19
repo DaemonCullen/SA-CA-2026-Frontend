@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Input your Goals"
+            android:text="@string/plans_page_inputGoals"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tap to get a plan tailored to you"
+            android:text="@string/plans_page_tapToTailor"
             android:textColor="#C8E6C9"
             android:textSize="13sp"
             android:layout_marginTop="4dp" />
@@ -40,14 +40,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:text="Plans"
+        android:text="@string/plans_page_title"
         android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/btnCreatePlan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Plan"
+        android:text="@string/plans_page_create_plan"
         android:layout_marginBottom="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView

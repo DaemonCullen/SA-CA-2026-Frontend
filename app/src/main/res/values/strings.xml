@@ -35,6 +35,18 @@
     <!--  Plans Page  -->
     <string name="plans_page_title">Plans</string>
     <string name="plans_page_create_plan">Create Plan</string>
+    <string name="plans_page_inputGoals">Input your Goals</string>
+    <string name="plans_page_tapToTailor">Tap to get a plan tailored to you</string>
+    <string name="plans_page_planName">Plan name</string>
+    <string name="plans_page_description">Description (optional)</string>
+    <string name="plans_page_cancel">Cancel</string>
+    <string name="plans_page_create">Create</string>
+    <!--  Goals Page  -->
+    <string name="goals_page_title">What is your goal?</string>
+    <string name="goals_page_title_desc">Choose one to get a personalised plan</string>
+    <string name="goals_page_loseWeight">Lose Weight</string>
+    <string name="goals_page_gainMuscle">Gain Muscle</string>
+    <string name="goals_page_learnCooking">Learn Cooking</string>
     <!--  Settings Page  -->
     <string name="settings_page_title">Settings</string>
     <string name="settings_page_title_button">Settings</string>

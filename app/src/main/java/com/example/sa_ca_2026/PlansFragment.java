@@ -98,10 +98,10 @@ public class PlansFragment extends Fragment {
 
     private void showCreateDialog() {
         EditText nameInput = new EditText(getContext());
-        nameInput.setHint("Plan name");
+        nameInput.setHint(getString(R.string.plans_page_planName));
 
         EditText descInput = new EditText(getContext());
-        descInput.setHint("Description (optional)");
+        descInput.setHint(getString(R.string.plans_page_description));
 
         // stack the two inputs vertically inside the dialog
         android.widget.LinearLayout layout = new android.widget.LinearLayout(getContext());
@@ -111,9 +111,9 @@ public class PlansFragment extends Fragment {
         layout.addView(descInput);
 
         new AlertDialog.Builder(getContext())
-                .setTitle("Create Plan")
+                .setTitle(getString(R.string.plans_page_create_plan))
                 .setView(layout)
-                .setPositiveButton("Create", (dialog, which) -> {
+                .setPositiveButton(getString(R.string.plans_page_create), (dialog, which) -> {
                     String name = nameInput.getText().toString().trim();
                     String desc = descInput.getText().toString().trim();
                     if (!name.isEmpty()) {
@@ -122,7 +122,7 @@ public class PlansFragment extends Fragment {
                         Toast.makeText(getContext(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(getString(R.string.plans_page_cancel), null)
                 .show();
     }
 

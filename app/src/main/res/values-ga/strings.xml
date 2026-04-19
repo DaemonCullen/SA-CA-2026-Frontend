@@ -15,7 +15,7 @@
     <!--  Meals Page  -->
     <string name="meals_page_title">Leathanach Béilí</string>
     <string name="meals_page_title_button">Béilí</string>
-    <string name="meals_search_bar">Serchó</string>
+    <string name="meals_search_bar">Curdaigh</string>
     <string name="meals_filter">Scagaire</string>
     <string name="meals_back_button">Ar ais</string>
     <string name="meals_addNewMeal">Cuir Béile Nua Leis</string>
@@ -35,7 +35,19 @@
     <string name="meals_filter_calories">Calóiraí &lt;= 500</string>
     <!--  Plans Page  -->
     <string name="plans_page_title">Pleananna</string>
-    <string name="plans_page_create_plan">Crúthaigh Plean</string>
+    <string name="plans_page_create_plan">Cruthaigh Plean</string>
+    <string name="plans_page_inputGoals">Cuir Isteach do Sproiceanna</string>
+    <string name="plans_page_tapToTailor">Tapáil chun plean a fháil atá saincheaptha duitse</string>
+    <string name="plans_page_planName">Anim plean</string>
+    <string name="plans_page_description">Cur síos (roghnach)</string>
+    <string name="plans_page_cancel">Cuir ar ceal</string>
+    <string name="plans_page_create">Cruthaigh</string>
+    <!--  Goals Page  -->
+    <string name="goals_page_title">Cad é do sprioc</string>
+    <string name="goals_page_title_desc">Pioc ceann amháin chun plean pearsanta afháil</string>
+    <string name="goals_page_loseWeight">Cailleadh Meáchain</string>
+    <string name="goals_page_gainMuscle">Faigh Matán</string>
+    <string name="goals_page_learnCooking">Cócaráil a Fhoghlaim</string>
     <!--  Settings Page  -->
     <string name="settings_page_title">Leathanach Socruithe</string>
     <string name="settings_page_title_button">Socruithe</string>
