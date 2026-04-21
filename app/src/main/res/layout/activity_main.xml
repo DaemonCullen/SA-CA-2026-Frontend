@@ -20,11 +20,21 @@
 
     </FrameLayout>
 
+    <View
+        android:id="@+id/bottomNavShadow"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:background="@drawable/top_shadow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
+        android:background="@color/background"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

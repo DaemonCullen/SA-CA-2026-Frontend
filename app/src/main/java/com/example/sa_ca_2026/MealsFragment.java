@@ -48,8 +48,10 @@ public class MealsFragment extends Fragment {
     // Filter State
     String selectedCategory = "";
     String selectedDifficulty = "";
-    String selectedMinProtein = "";
-    String selectedMaxCalories = "";
+    float selectedProteinMin = 0f;
+    float selectedProteinMax = 100f;
+    float selectedCaloriesMin = 0f;
+    float selectedCaloriesMax = 2000f;
 
     // Constructor (Don't delete)
     public MealsFragment() {
@@ -148,23 +150,8 @@ public class MealsFragment extends Fragment {
                         meal.difficulty.equalsIgnoreCase(selectedDifficulty);
             }
 
-            if (!selectedMinProtein.isEmpty()) {
-                try {
-                    double minProtein = Double.parseDouble(selectedMinProtein);
-                    matchesProtein = meal.protein >= minProtein;
-                } catch (NumberFormatException e) {
-                    matchesProtein = true;
-                }
-            }
-
-            if (!selectedMaxCalories.isEmpty()) {
-                try {
-                    double maxCalories = Double.parseDouble(selectedMaxCalories);
-                    matchesCalories = meal.calories <= maxCalories;
-                } catch (NumberFormatException e) {
-                    matchesCalories = true;
-                }
-            }
+            matchesProtein = meal.protein >= selectedProteinMin && meal.protein <= selectedProteinMax;
+            matchesCalories = meal.calories >= selectedCaloriesMin && meal.calories <= selectedCaloriesMax;
 
             if (matchesSearch && matchesCategory && matchesDifficulty && matchesProtein && matchesCalories) {
                 displayedMealNames.add(meal.name);
@@ -308,10 +295,16 @@ public class MealsFragment extends Fragment {
 
         Spinner categorySpinner = dialogView.findViewById(R.id.filterCategorySpinner);
         Spinner difficultySpinner = dialogView.findViewById(R.id.filterDifficultySpinner);
-        EditText proteinInput = dialogView.findViewById(R.id.filterProteinInput);
-        EditText caloriesInput = dialogView.findViewById(R.id.filterCaloriesInput);
 
-        String[] categoryOptions = {"Any", "Breakfast", "Lunch", "Dinner"};
+        TextView textProteinRange = dialogView.findViewById(R.id.textProteinRange);
+        TextView textCaloriesRange = dialogView.findViewById(R.id.textCaloriesRange);
+
+        com.google.android.material.slider.RangeSlider proteinRangeSlider =
+                dialogView.findViewById(R.id.proteinRangeSlider);
+        com.google.android.material.slider.RangeSlider caloriesRangeSlider =
+                dialogView.findViewById(R.id.caloriesRangeSlider);
+
+        String[] categoryOptions = {getString(R.string.meals_filter_any), getString(R.string.meals_filter_breakfast), getString(R.string.meals_filter_lunch), getString(R.string.meals_filter_dinner)};
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
@@ -320,7 +313,7 @@ public class MealsFragment extends Fragment {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
 
-        String[] difficultyOptions = {"Any", "Easy", "Medium", "Hard"};
+        String[] difficultyOptions = {getString(R.string.meals_filter_any), getString(R.string.meals_filter_easy), getString(R.string.meals_filter_medium), getString(R.string.meals_filter_hard)};
         ArrayAdapter<String> difficultyAdapter = new ArrayAdapter<>(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
@@ -347,22 +340,41 @@ public class MealsFragment extends Fragment {
             }
         }
 
-        proteinInput.setText(selectedMinProtein);
-        caloriesInput.setText(selectedMaxCalories);
+        proteinRangeSlider.setValues(selectedProteinMin, selectedProteinMax);
+        caloriesRangeSlider.setValues(selectedCaloriesMin, selectedCaloriesMax);
+
+        textProteinRange.setText((int) selectedProteinMin + "g - " + (int) selectedProteinMax + "g"); // Check These
+        textCaloriesRange.setText((int) selectedCaloriesMin + " - " + (int) selectedCaloriesMax);
+
+        proteinRangeSlider.addOnChangeListener((slider, value, fromUser) -> {
+            List<Float> values = slider.getValues();
+            textProteinRange.setText(values.get(0).intValue() + "g - " + values.get(1).intValue() + "g");
+        });
+
+        caloriesRangeSlider.addOnChangeListener((slider, value, fromUser) -> {
+            List<Float> values = slider.getValues();
+            textCaloriesRange.setText(values.get(0).intValue() + " - " + values.get(1).intValue());
+        });
 
         AlertDialog dialog = new AlertDialog.Builder(requireContext())
-                .setTitle("Filter Meals")
+                .setTitle(getString(R.string.meals_filter))
                 .setView(dialogView)
-                .setNegativeButton("Cancel", null)
-                .setNeutralButton("Clear", null)
-                .setPositiveButton("Apply", (d, which) -> {
+                .setNegativeButton(getString(R.string.meals_filter_cancel), null)
+                .setNeutralButton(getString(R.string.meals_filter_cancel), null)
+                .setPositiveButton(getString(R.string.meals_filter_apply), (d, which) -> {
                     String chosenCategory = categorySpinner.getSelectedItem().toString();
                     String chosenDifficulty = difficultySpinner.getSelectedItem().toString();
 
-                    selectedCategory = chosenCategory.equals("Any") ? "" : chosenCategory;
-                    selectedDifficulty = chosenDifficulty.equals("Any") ? "" : chosenDifficulty;
-                    selectedMinProtein = proteinInput.getText().toString().trim();
-                    selectedMaxCalories = caloriesInput.getText().toString().trim();
+                    selectedCategory = chosenCategory.equals(getString(R.string.meals_filter_any)) ? "" : chosenCategory;
+                    selectedDifficulty = chosenDifficulty.equals(getString(R.string.meals_filter_any)) ? "" : chosenDifficulty;
+
+                    List<Float> proteinValues = proteinRangeSlider.getValues();
+                    selectedProteinMin = proteinValues.get(0);
+                    selectedProteinMax = proteinValues.get(1);
+
+                    List<Float> caloriesValues = caloriesRangeSlider.getValues();
+                    selectedCaloriesMin = caloriesValues.get(0);
+                    selectedCaloriesMax = caloriesValues.get(1);
 
                     updateMealList();
                 })
@@ -373,15 +385,21 @@ public class MealsFragment extends Fragment {
         dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(v -> {
             selectedCategory = "";
             selectedDifficulty = "";
-            selectedMinProtein = "";
-            selectedMaxCalories = "";
 
-            categorySpinner.setSelection(0); // Any
-            difficultySpinner.setSelection(0); // Any
-            proteinInput.setText("");
-            caloriesInput.setText("");
+            selectedProteinMin = 0f;
+            selectedProteinMax = 100f;
 
-            updateMealList();
+            selectedCaloriesMin = 0f;
+            selectedCaloriesMax = 2000f;
+
+            categorySpinner.setSelection(0);
+            difficultySpinner.setSelection(0);
+
+            proteinRangeSlider.setValues(0f, 100f);
+            caloriesRangeSlider.setValues(0f, 2000f);
+
+            textProteinRange.setText(getString(R.string.meals_filter_proteinRangeValue));
+            textCaloriesRange.setText(getString(R.string.meals_filter_caloriesRangeValue));
         });
     }
     private void createMealInApi(Meal newMeal) {

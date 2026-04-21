@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="default_protein_range">
+        <item>0</item>
+        <item>100</item>
+    </array>
+
+    <array name="default_calories_range">
+        <item>0</item>
+        <item>2000</item>
+    </array>
+</resources>

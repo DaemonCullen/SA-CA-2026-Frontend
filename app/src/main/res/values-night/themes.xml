@@ -4,6 +4,7 @@
         <item name="android:windowBackground">@color/background</item>
         <item name="colorSurface">@color/background</item>
         <item name="colorOnSurface">@color/text</item>
+        <item name="elevationOverlayEnabled">false</item>
     </style>
     <style name="darkModeSwitch" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated">@color/background</item>

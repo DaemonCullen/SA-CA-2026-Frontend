@@ -23,6 +23,7 @@
     <string name="meals_filter_chooseFilter">Elegir filtro</string>
     <string name="meals_filter_noFilter">Sin filtro</string>
     <string name="meals_filter_category">Categoría</string>
+    <string name="meals_filter_any">Any</string>
     <string name="meals_filter_breakfast">Desayuno</string>
     <string name="meals_filter_lunch">Almuerzo</string>
     <string name="meals_filter_dinner">Cena</string>
@@ -31,10 +32,13 @@
     <string name="meals_filter_medium">Media</string>
     <string name="meals_filter_hard">Difícil</string>
     <string name="meals_filter_Other">Otro</string>
-    <string name="meals_filter_minProtein">Minimum Protein (g)</string>
-    <string name="meals_filter_minProtein_example">e.g. 20</string>
-    <string name="meals_filter_maxCalories">Maximum Calories</string>
-    <string name="meals_filter_maxCalories_example">e.g. 500</string>
+    <string name="meals_filter_proteinRange">Protein Range (g)</string>
+    <string name="meals_filter_proteinRangeValue">0g &#8211; 100g</string>
+    <string name="meals_filter_caloriesRange">Calories Range</string>
+    <string name="meals_filter_caloriesRangeValue">0 &#8211; 2000</string>
+    <string name="meals_filter_clear">Clear</string>
+    <string name="meals_filter_cancel">Cancel</string>
+    <string name="meals_filter_apply">Apply</string>
     <!--  Plans Page  -->
     <string name="plans_page_title">Planes</string>
     <string name="plans_page_create_plan">Crear Plan</string>
