@@ -46,8 +46,10 @@ public class MealsFragment extends Fragment {
     ArrayList<String> displayedMealNames = new ArrayList<>();
 
     // Filter State
-    String selectedFilterType = "None";
-    String selectedFilterValue = "";
+    String selectedCategory = "";
+    String selectedDifficulty = "";
+    String selectedMinProtein = "";
+    String selectedMaxCalories = "";
 
     // Constructor (Don't delete)
     public MealsFragment() {
@@ -131,34 +133,40 @@ public class MealsFragment extends Fragment {
             boolean matchesSearch = meal.name != null &&
                     meal.name.toLowerCase().contains(query);
 
-            boolean matchesFilter = true;
+            boolean matchesCategory = true;
+            boolean matchesDifficulty = true;
+            boolean matchesProtein = true;
+            boolean matchesCalories = true;
 
-            if (selectedFilterType.equals("Category")) {
-                matchesFilter = meal.category != null &&
-                        meal.category.equalsIgnoreCase(selectedFilterValue);
+            if (!selectedCategory.isEmpty()) {
+                matchesCategory = meal.category != null &&
+                        meal.category.equalsIgnoreCase(selectedCategory);
             }
-            else if (selectedFilterType.equals("Difficulty")) {
-                matchesFilter = meal.difficulty != null &&
-                        meal.difficulty.equalsIgnoreCase(selectedFilterValue);
+
+            if (!selectedDifficulty.isEmpty()) {
+                matchesDifficulty = meal.difficulty != null &&
+                        meal.difficulty.equalsIgnoreCase(selectedDifficulty);
             }
-            else if (selectedFilterType.equals("MinProtein")) {
+
+            if (!selectedMinProtein.isEmpty()) {
                 try {
-                    double minProtein = Double.parseDouble(selectedFilterValue);
-                    matchesFilter = meal.protein >= minProtein;
+                    double minProtein = Double.parseDouble(selectedMinProtein);
+                    matchesProtein = meal.protein >= minProtein;
                 } catch (NumberFormatException e) {
-                    matchesFilter = true;
-                }
-            }
-            else if (selectedFilterType.equals("MaxCalories")) {
-                try {
-                    double maxCalories = Double.parseDouble(selectedFilterValue);
-                    matchesFilter = meal.calories <= maxCalories;
-                } catch (NumberFormatException e) {
-                    matchesFilter = true;
+                    matchesProtein = true;
                 }
             }
 
-            if (matchesSearch && matchesFilter) {
+            if (!selectedMaxCalories.isEmpty()) {
+                try {
+                    double maxCalories = Double.parseDouble(selectedMaxCalories);
+                    matchesCalories = meal.calories <= maxCalories;
+                } catch (NumberFormatException e) {
+                    matchesCalories = true;
+                }
+            }
+
+            if (matchesSearch && matchesCategory && matchesDifficulty && matchesProtein && matchesCalories) {
                 displayedMealNames.add(meal.name);
             }
         }
@@ -291,6 +299,90 @@ public class MealsFragment extends Fragment {
                     }
                 })
                 .show();
+    }
+    // ===================
+    // Shows Filter Dialog
+    // ===================
+    private void showFilterDialog() {
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_filter_meals, null);
+
+        Spinner categorySpinner = dialogView.findViewById(R.id.filterCategorySpinner);
+        Spinner difficultySpinner = dialogView.findViewById(R.id.filterDifficultySpinner);
+        EditText proteinInput = dialogView.findViewById(R.id.filterProteinInput);
+        EditText caloriesInput = dialogView.findViewById(R.id.filterCaloriesInput);
+
+        String[] categoryOptions = {"Any", "Breakfast", "Lunch", "Dinner"};
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                categoryOptions
+        );
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(categoryAdapter);
+
+        String[] difficultyOptions = {"Any", "Easy", "Medium", "Hard"};
+        ArrayAdapter<String> difficultyAdapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                difficultyOptions
+        );
+        difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        difficultySpinner.setAdapter(difficultyAdapter);
+
+        if (!selectedCategory.isEmpty()) {
+            for (int i = 0; i < categoryOptions.length; i++) {
+                if (categoryOptions[i].equalsIgnoreCase(selectedCategory)) {
+                    categorySpinner.setSelection(i);
+                    break;
+                }
+            }
+        }
+
+        if (!selectedDifficulty.isEmpty()) {
+            for (int i = 0; i < difficultyOptions.length; i++) {
+                if (difficultyOptions[i].equalsIgnoreCase(selectedDifficulty)) {
+                    difficultySpinner.setSelection(i);
+                    break;
+                }
+            }
+        }
+
+        proteinInput.setText(selectedMinProtein);
+        caloriesInput.setText(selectedMaxCalories);
+
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                .setTitle("Filter Meals")
+                .setView(dialogView)
+                .setNegativeButton("Cancel", null)
+                .setNeutralButton("Clear", null)
+                .setPositiveButton("Apply", (d, which) -> {
+                    String chosenCategory = categorySpinner.getSelectedItem().toString();
+                    String chosenDifficulty = difficultySpinner.getSelectedItem().toString();
+
+                    selectedCategory = chosenCategory.equals("Any") ? "" : chosenCategory;
+                    selectedDifficulty = chosenDifficulty.equals("Any") ? "" : chosenDifficulty;
+                    selectedMinProtein = proteinInput.getText().toString().trim();
+                    selectedMaxCalories = caloriesInput.getText().toString().trim();
+
+                    updateMealList();
+                })
+                .create();
+
+        dialog.show();
+
+        dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(v -> {
+            selectedCategory = "";
+            selectedDifficulty = "";
+            selectedMinProtein = "";
+            selectedMaxCalories = "";
+
+            categorySpinner.setSelection(0); // Any
+            difficultySpinner.setSelection(0); // Any
+            proteinInput.setText("");
+            caloriesInput.setText("");
+
+            updateMealList();
+        });
     }
     private void createMealInApi(Meal newMeal) {
         MealsApi api = RetrofitClient.getClient().create(MealsApi.class);
@@ -437,70 +529,7 @@ public class MealsFragment extends Fragment {
         });
 
         // Listens for filter changes
-        filterButton.setOnClickListener(v -> {
-            ArrayList<FilterOption> options = new ArrayList<>();
-            options.add(new FilterOption("No Filter", false));
-
-            options.add(new FilterOption("--- Category ---", true));
-            options.add(new FilterOption("Breakfast", false));
-            options.add(new FilterOption("Lunch", false));
-            options.add(new FilterOption("Dinner", false));
-
-            options.add(new FilterOption("--- Difficulty ---", true));
-            options.add(new FilterOption("Easy", false));
-            options.add(new FilterOption("Medium", false));
-            options.add(new FilterOption("Hard", false));
-
-            options.add(new FilterOption("--- Other ---", true));
-            options.add(new FilterOption("Protein >= 20g", false));
-            options.add(new FilterOption("Calories <= 500", false)); // Cal / Kal IDK
-
-            FilterOptionAdapter adapter = new FilterOptionAdapter(requireContext(), options);
-
-            new androidx.appcompat.app.AlertDialog.Builder(requireContext())
-                    .setTitle("Choose filter")
-                    .setAdapter(adapter, (dialog, which) -> {
-                        FilterOption selected = options.get(which);
-
-                        if (selected.isHeader) {
-                            return;
-                        }
-
-                        switch (selected.title) {
-                            case "No Filter":
-                                selectedFilterType = "None";
-                                selectedFilterValue = "";
-                                break;
-
-                            case "Breakfast":
-                            case "Lunch":
-                            case "Dinner":
-                                selectedFilterType = "Category";
-                                selectedFilterValue = selected.title;
-                                break;
-
-                            case "Easy":
-                            case "Medium":
-                            case "Hard":
-                                selectedFilterType = "Difficulty";
-                                selectedFilterValue = selected.title;
-                                break;
-
-                            case "Protein >= 20g":
-                                selectedFilterType = "MinProtein";
-                                selectedFilterValue = "20";
-                                break;
-
-                            case "Calories <= 500":
-                                selectedFilterType = "MaxCalories";
-                                selectedFilterValue = "500";
-                                break;
-                        }
-
-                        updateMealList();
-                    })
-                    .show();
-        });
+        filterButton.setOnClickListener(v -> showFilterDialog());
 
         searchView.clearFocus();
         loadMealsFromApi();

@@ -30,8 +30,10 @@
     <string name="meals_filter_medium">Medium</string>
     <string name="meals_filter_hard">Hard</string>
     <string name="meals_filter_Other">Other</string>
-    <string name="meals_filter_protein">Protein >= 20g</string>
-    <string name="meals_filter_calories">Calories &lt;= 500</string>
+    <string name="meals_filter_minProtein">Minimum Protein (g)</string>
+    <string name="meals_filter_minProtein_example">e.g. 20</string>
+    <string name="meals_filter_maxCalories">Maximum Calories</string>
+    <string name="meals_filter_maxCalories_example">e.g. 500</string>
     <!--  Plans Page  -->
     <string name="plans_page_title">Plans</string>
     <string name="plans_page_create_plan">Create Plan</string>

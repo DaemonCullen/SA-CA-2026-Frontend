@@ -31,8 +31,10 @@
     <string name="meals_filter_medium">Media</string>
     <string name="meals_filter_hard">Difícil</string>
     <string name="meals_filter_Other">Otro</string>
-    <string name="meals_filter_protein">Proteína >= 20g</string>
-    <string name="meals_filter_calories">Calorías &lt;= 500</string>
+    <string name="meals_filter_minProtein">Minimum Protein (g)</string>
+    <string name="meals_filter_minProtein_example">e.g. 20</string>
+    <string name="meals_filter_maxCalories">Maximum Calories</string>
+    <string name="meals_filter_maxCalories_example">e.g. 500</string>
     <!--  Plans Page  -->
     <string name="plans_page_title">Planes</string>
     <string name="plans_page_create_plan">Crear Plan</string>
