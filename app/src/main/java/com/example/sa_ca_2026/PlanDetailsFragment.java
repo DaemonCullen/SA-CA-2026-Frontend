@@ -138,16 +138,19 @@ public class PlanDetailsFragment extends Fragment {
         List<Meal> dinnerMeals = new ArrayList<>();
 
         for (Meal meal : allMeals) {
-            if ("Breakfast".equalsIgnoreCase(meal.category)) {
+            if (getString(R.string.plan_details_breakfast).equalsIgnoreCase(meal.category)) {
                 breakfastMeals.add(meal);
-            } else if ("Lunch".equalsIgnoreCase(meal.category)) {
+            } else if (getString(R.string.plan_details_lunch).equalsIgnoreCase(meal.category)) {
                 lunchMeals.add(meal);
-            } else if ("Dinner".equalsIgnoreCase(meal.category)) {
+            } else if (getString(R.string.plan_details_dinner).equalsIgnoreCase(meal.category)) {
                 dinnerMeals.add(meal);
             }
         }
 
-        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        String[] days = {getString(R.string.plan_details_monday), getString(R.string.plan_details_tuesday),
+                getString(R.string.plan_details_wednesday), getString(R.string.plan_details_thursday),
+                getString(R.string.plan_details_friday), getString(R.string.plan_details_saturday),
+                getString(R.string.plan_details_sunday)};
         Random random = new Random();
 
         List<Meal> breakfastPool = breakfastMeals.isEmpty() ? null : buildPool(breakfastMeals, days.length, random);

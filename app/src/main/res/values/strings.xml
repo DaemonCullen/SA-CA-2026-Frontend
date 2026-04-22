@@ -47,6 +47,22 @@
     <string name="plans_page_description">Description (optional)</string>
     <string name="plans_page_cancel">Cancel</string>
     <string name="plans_page_create">Create</string>
+    <!--  Plan Details  -->
+    <string name="plan_details_title">Weekly Plan</string>
+    <string name="plan_details_monday">Monday</string>
+    <string name="plan_details_tuesday">Tuesday</string>
+    <string name="plan_details_wednesday">Wednesday</string>
+    <string name="plan_details_thursday">Thursday</string>
+    <string name="plan_details_friday">Friday</string>
+    <string name="plan_details_saturday">Saturday</string>
+    <string name="plan_details_sunday">Sunday</string>
+    <string name="plan_details_breakfast">Breakfast</string>
+    <string name="plan_details_lunch">Lunch</string>
+    <string name="plan_details_dinner">Dinner</string>
+    <string name="plan_details_noBreakfast">No breakfast meal matches</string>
+    <string name="plan_details_noLunch">No lunch meal matches</string>
+    <string name="plan_details_noDinner">No breakfast meal matches</string>
+    <string name="plan_details_mealName">Meal Name</string>
     <!--  Goals Page  -->
     <string name="goals_page_title">What is your goal?</string>
     <string name="goals_page_title_desc">Choose one to get a personalised plan</string>

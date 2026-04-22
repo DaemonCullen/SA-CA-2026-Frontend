@@ -9,4 +9,9 @@
     <color name="settings_item">#EDEDED</color>
     <color name="dark_mode_button">#573594</color>
     <color name="languages_button">#E6A326</color>
+
+    <color name="breakfast">#9EDBED</color>
+    <color name="lunch">#FCBA58</color>
+    <color name="dinner">#DA4B52</color>
+
 </resources>

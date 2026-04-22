@@ -10,7 +10,7 @@
         android:id="@+id/bannerInputGoals"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2E7D32"
+        android:background="@color/card_background"
         android:orientation="vertical"
         android:padding="20dp"
         android:layout_marginBottom="16dp"
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/plans_page_inputGoals"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/plans_page_tapToTailor"
-            android:textColor="#C8E6C9"
+            android:textColor="@color/text"
             android:textSize="13sp"
             android:layout_marginTop="4dp" />
 
@@ -41,6 +41,7 @@
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:text="@string/plans_page_title"
+        android:textColor="@color/text"
         android:layout_marginBottom="16dp" />
 
     <Button
@@ -48,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/plans_page_create_plan"
+        android:textColor="@color/text"
         android:layout_marginBottom="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView

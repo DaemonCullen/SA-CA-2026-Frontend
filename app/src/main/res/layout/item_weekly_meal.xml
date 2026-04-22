@@ -4,8 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="12dp"
-    android:background="@android:color/white"
-    android:layout_marginBottom="8dp">
+    android:background="@color/card_background"
+    android:layout_marginBottom="8dp"
+    android:elevation="10dp">
 
     <!-- Day Header -->
     <TextView
@@ -14,9 +15,9 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text"
         android:paddingBottom="8dp"
-        android:text="Monday" />
+        android:text="@string/plan_details_monday" />
 
     <!-- Breakfast -->
     <LinearLayout
@@ -30,8 +31,8 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:text="Breakfast" />
+            android:textColor="@color/breakfast"
+            android:text="@string/plan_details_breakfast" />
 
         <TextView
             android:id="@+id/textViewBreakfast"
@@ -39,7 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:text="Meal Name" />
+            android:textColor="@color/text"
+            android:text="@string/plan_details_mealName" />
     </LinearLayout>
 
     <!-- Lunch -->
@@ -54,8 +56,8 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:text="Lunch" />
+            android:textColor="@color/lunch"
+            android:text="@string/plan_details_lunch" />
 
         <TextView
             android:id="@+id/textViewLunch"
@@ -63,7 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:text="Meal Name" />
+            android:textColor="@color/text"
+            android:text="@string/plan_details_mealName" />
     </LinearLayout>
 
     <!-- Dinner -->
@@ -78,8 +81,8 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:text="Dinner" />
+            android:textColor="@color/dinner"
+            android:text="@string/plan_details_dinner" />
 
         <TextView
             android:id="@+id/textViewDinner"
@@ -87,7 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:text="Meal Name" />
+            android:textColor="@color/text"
+            android:text="@string/plan_details_mealName" />
     </LinearLayout>
 
 </LinearLayout>
