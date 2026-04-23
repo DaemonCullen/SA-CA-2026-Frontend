@@ -360,7 +360,7 @@ public class MealsFragment extends Fragment {
                 .setTitle(getString(R.string.meals_filter))
                 .setView(dialogView)
                 .setNegativeButton(getString(R.string.meals_filter_cancel), null)
-                .setNeutralButton(getString(R.string.meals_filter_cancel), null)
+                .setNeutralButton(getString(R.string.meals_filter_clear), null)
                 .setPositiveButton(getString(R.string.meals_filter_apply), (d, which) -> {
                     String chosenCategory = categorySpinner.getSelectedItem().toString();
                     String chosenDifficulty = difficultySpinner.getSelectedItem().toString();
