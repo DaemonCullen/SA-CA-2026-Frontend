@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment {
 
         CardView cardMeals = view.findViewById(R.id.cardMeals);
         CardView cardPlans = view.findViewById(R.id.cardPlans);
+        CardView cardIngredients = view.findViewById(R.id.cardIngredients);
         CardView cardSettings = view.findViewById(R.id.cardSettings);
 
         BottomNavigationView navBar = requireActivity().findViewById(R.id.bottomNavigationView);
@@ -39,6 +40,10 @@ public class HomeFragment extends Fragment {
 
         cardPlans.setOnClickListener(v -> {
             navBar.setSelectedItemId(R.id.action_plans);
+        });
+
+        cardIngredients.setOnClickListener(v -> {
+            navBar.setSelectedItemId(R.id.action_ingredients);
         });
 
         cardSettings.setOnClickListener(v -> {

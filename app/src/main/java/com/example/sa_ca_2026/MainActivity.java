@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.action_plans) { // Changed to match XML ID
                 replaceFragment(new PlansFragment());
                 return true;
+            } else if (id == R.id.action_ingredients) {
+                replaceFragment(new AllIngredientsFragment());
+                return true;
             }
             return false;
         });

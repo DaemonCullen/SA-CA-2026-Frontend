@@ -1,11 +1,6 @@
 package com.example.sa_ca_2026;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +13,11 @@ import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 
@@ -40,6 +40,7 @@ public class MealsFragment extends Fragment {
     SearchView searchView;
     Spinner sortSpinner;
     Button filterButton;
+    Button btnAddMealTop;
     ArrayAdapter<String> arrayAdapter;
     // Lists for data
     ArrayList<Meal> allMealsList = new ArrayList<>();
@@ -447,7 +448,7 @@ public class MealsFragment extends Fragment {
     // Creates fragment view
     // ===================
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_meals, container, false);
@@ -458,66 +459,15 @@ public class MealsFragment extends Fragment {
         sortSpinner = view.findViewById(R.id.sortSpinner);
         filterButton = view.findViewById(R.id.filterButton);
 
+        filterButton = view.findViewById(R.id.filterButton);
+        btnAddMealTop = view.findViewById(R.id.btnAddMealTop);
+
+        filterButton.setOnClickListener(v -> showFilterDialog());
+        btnAddMealTop.setOnClickListener(v -> showAddMealDialog());
+
         // Search setup
         searchView.setQueryHint(getString(R.string.meals_search_bar));
         searchView.setIconifiedByDefault(false);
-
-        // List adapter setup
-        arrayAdapter = new ArrayAdapter<>(
-                requireContext(),
-                android.R.layout.simple_list_item_1,
-                displayedMealNames
-        );
-
-        // Inflate footer layout
-        View footerView = inflater.inflate(R.layout.list_add_meal, listView, false);
-
-        // Find footer button
-        Button addMealButton = footerView.findViewById(R.id.addMealButton);
-
-        // Add footer to ListView
-        listView.addFooterView(footerView);
-
-        // Set adapter after footer is added
-        listView.setAdapter(arrayAdapter);
-
-        // Footer button click
-        addMealButton.setOnClickListener(v -> showAddMealDialog());
-
-        // Makes list items clickable (MealDetailFragment)
-        listView.setOnItemClickListener((parent, view1, position, id) -> {
-            // Ignore footer clicks
-            if (position >= displayedMealNames.size()) {
-                return;
-            }
-
-            String selectedName = displayedMealNames.get(position);
-            Meal selectedMeal = null;
-
-            for (Meal m : allMealsList) {
-                if (m.name.equals(selectedName)) {
-                    selectedMeal = m;
-                    break;
-                }
-            }
-
-            if (selectedMeal != null) {
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, MealDetailFragment.newInstance(selectedMeal.id));
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });
-
-        // Sort setup
-        String[] sortOptions = {"A-Z", "Z-A"};
-        ArrayAdapter<String> sortAdapter = new ArrayAdapter<>(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                sortOptions
-        );
-        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortSpinner.setAdapter(sortAdapter);
 
         // Listens for search changes
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -526,7 +476,6 @@ public class MealsFragment extends Fragment {
                 updateMealList();
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 updateMealList();
@@ -534,20 +483,37 @@ public class MealsFragment extends Fragment {
             }
         });
 
-        // Listens for sort changes
-        sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                updateMealList();
-            }
+        // List adapter setup
+        arrayAdapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                displayedMealNames
+        );
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+        // Set adapter
+        listView.setAdapter(arrayAdapter);
+
+        // Makes list items clickable (MealDetailFragment)
+        listView.setOnItemClickListener((parent, view1, position, id) -> {
+            // Ignore footer clicks
+            if (position >= displayedMealNames.size()) {
+                return;
+            }
+            String selectedName = displayedMealNames.get(position);
+            Meal selectedMeal = null;
+            for (Meal m : allMealsList) {
+                if (m.name.equals(selectedName)) {
+                    selectedMeal = m;
+                    break;
+                }
+            }
+            if (selectedMeal != null) {
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, MealDetailFragment.newInstance(selectedMeal.id));
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
-
-        // Listens for filter changes
-        filterButton.setOnClickListener(v -> showFilterDialog());
 
         searchView.clearFocus();
         loadMealsFromApi();

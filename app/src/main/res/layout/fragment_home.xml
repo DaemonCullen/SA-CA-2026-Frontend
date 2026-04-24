@@ -20,15 +20,33 @@
             android:textSize="28sp"
             android:textStyle="bold"
             android:textColor="@color/text"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="4dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/home_welcome_message"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/text"
-            android:layout_marginBottom="32dp" />
+            android:layout_marginBottom="24dp" />
+
+        <!-- Meals Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Browse Meals"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explore hundreds of recipes filtered by calories, protein, difficulty and more."
+            android:textSize="12sp"
+            android:textColor="@color/text"
+            android:layout_marginBottom="12dp" />
 
         <!-- Meals Card -->
         <androidx.cardview.widget.CardView
@@ -104,7 +122,63 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Settings Card -->
+        <!-- Ingredients Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Browse ingredients and their nutritional values."
+            android:textSize="12sp"
+            android:textColor="@color/text"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Ingredients Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@color/card_background">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Browse Ingredients"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Search by name, filter by organic, protein, price and more."
+                    android:textSize="14sp"
+                    android:textColor="@color/text"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Settings Section -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardSettings"
             android:layout_width="match_parent"

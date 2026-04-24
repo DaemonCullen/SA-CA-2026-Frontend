@@ -3,7 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/background">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/colorPrimary"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Meal Plans"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Create 7-day plans tailored to your goals"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <!-- Goals banner -->
     <LinearLayout
@@ -12,23 +37,23 @@
         android:layout_height="wrap_content"
         android:background="@color/card_background"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:layout_marginBottom="16dp"
+        android:padding="16dp"
+        android:layout_margin="16dp"
         android:clickable="true"
         android:focusable="true">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/plans_page_inputGoals"
-            android:textColor="@color/text"
-            android:textSize="20sp"
+            android:text="Set Your Goals"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/plans_page_tapToTailor"
+            android:text="Choose: Muscle Building, Fat Loss, or General Health to get personalized meal plans."
             android:textColor="@color/text"
             android:textSize="13sp"
             android:layout_marginTop="4dp" />
@@ -39,23 +64,35 @@
         android:id="@+id/textViewPlansTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:text="@string/plans_page_title"
+        android:textSize="18sp"
+        android:text="Your Plans"
         android:textColor="@color/text"
-        android:layout_marginBottom="16dp" />
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tap a plan to view meals. Long press to delete."
+        android:textSize="12sp"
+        android:textColor="@color/text"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp" />
 
     <Button
         android:id="@+id/btnCreatePlan"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/plans_page_create_plan"
-        android:textColor="@color/text"
+        android:text="Create New Plan"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listViewPlans"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:layout_marginHorizontal="16dp" />
 
 </LinearLayout>

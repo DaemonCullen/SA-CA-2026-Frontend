@@ -31,7 +31,7 @@ public class MealDetailFragment extends Fragment {
             prepTimeText, cookTimeText, servingsText,
             caloriesText, proteinText, totalFatText;
 
-    private Button btnDeleteMeal, btnEditMeal;
+    private Button btnDeleteMeal, btnEditMeal, btnViewIngredients;
 
     public static MealDetailFragment newInstance(int id) {
         MealDetailFragment fragment = new MealDetailFragment();
@@ -69,6 +69,7 @@ public class MealDetailFragment extends Fragment {
 
         btnDeleteMeal = view.findViewById(R.id.btnDeleteMeal);
         btnEditMeal = view.findViewById(R.id.btnEditMeal);
+        btnViewIngredients = view.findViewById(R.id.btnViewIngredients);
 
         btnDeleteMeal.setOnClickListener(v -> {
             new AlertDialog.Builder(requireContext())
@@ -80,6 +81,14 @@ public class MealDetailFragment extends Fragment {
         });
 
         btnEditMeal.setOnClickListener(v -> showEditMealDialog());
+
+        btnViewIngredients.setOnClickListener(v -> {
+            Fragment ingredientFragment = IngredientListFragment.newInstance(mealId);
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_layout, ingredientFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
 
         loadMealDetails();
 

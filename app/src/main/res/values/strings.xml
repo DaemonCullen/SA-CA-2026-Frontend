@@ -3,8 +3,8 @@
     <!--  Home Page  -->
     <string name="home_page_title">Home</string>
     <string name="home_page_title_button">Home</string>
-    <string name="home_welcome">Welcome Back!</string>
-    <string name="home_welcome_message">Ready to eat healthy today?</string>
+    <string name="home_welcome">Healthy Meal Planner</string>
+    <string name="home_welcome_message">Plan your weekly meals, track nutrition and achieve your health goals. Browse meals, create custom plans, and discover ingredients.</string>
     <string name="home_browse_meals">Browse Meals</string>
     <string name="home_meal_plans">Meal Plans</string>
     <string name="home_settings">Settings</string>

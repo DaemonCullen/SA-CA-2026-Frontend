@@ -21,5 +21,6 @@ public class Ingredient {
     public double macronutrientComposition;
     public double dietaryFiberPercentage;
     public double calorieDensity;
+    public int mealId;
 
 }

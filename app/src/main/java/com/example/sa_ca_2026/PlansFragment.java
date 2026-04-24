@@ -236,7 +236,7 @@ public class PlansFragment extends Fragment {
         @Override
         public PlansViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(android.R.layout.simple_list_item_1, parent, false);
+                    .inflate(R.layout.item_plan, parent, false);
             return new PlansViewHolder(view);
         }
 
@@ -244,6 +244,7 @@ public class PlansFragment extends Fragment {
         public void onBindViewHolder(@NonNull PlansViewHolder holder, int position) {
             Plan plan = plans.get(position);
             holder.textViewPlan.setText(plan.name);
+            holder.textViewDesc.setText(plan.description);
             holder.itemView.setOnClickListener(v -> clickListener.onPlanClick(plan));
             holder.itemView.setOnLongClickListener(v -> {
                 longClickListener.onPlanLongClick(plan);
@@ -258,9 +259,11 @@ public class PlansFragment extends Fragment {
 
         static class PlansViewHolder extends RecyclerView.ViewHolder {
             android.widget.TextView textViewPlan;
+            android.widget.TextView textViewDesc;
             PlansViewHolder(View itemView) {
                 super(itemView);
-                textViewPlan = itemView.findViewById(android.R.id.text1);
+                textViewPlan = itemView.findViewById(R.id.planName);
+                textViewDesc = itemView.findViewById(R.id.planDescription);
             }
         }
     }

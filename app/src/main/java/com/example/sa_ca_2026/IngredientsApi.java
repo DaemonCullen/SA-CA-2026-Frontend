@@ -59,4 +59,16 @@ public interface IngredientsApi {
 
     @DELETE("api/ingredients/{id}")
     Call<Void> removeIngredient(@Path("id") int id);
+
+    @POST("api/meals/{mealId}/ingredients")
+    Call<Ingredient> addIngredientToMeal(@Path("mealId") int mealId, @Body Ingredient ingredient);
+
+    @GET("api/meals/{mealId}/ingredients")
+    Call<List<Ingredient>> getIngredientsByMeal(@Path("mealId") int mealId);
+
+    @PUT("api/meals/{mealId}/ingredients")
+    Call<List<Ingredient>> setMealIngredients(@Path("mealId") int mealId, @Body List<Ingredient> ingredients);
+
+    @POST("api/meals/{mealId}/ingredients/random")
+    Call<List<Ingredient>> addRandomIngredients(@Path("mealId") int mealId, @Query("count") int count);
 }
