@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Browse Meals"
+            android:text="@string/home_browse_meals"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary"
@@ -43,7 +43,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Explore hundreds of recipes filtered by calories, protein, difficulty and more."
+            android:text="@string/home_browse_mealsDesc"
             android:textSize="12sp"
             android:textColor="@color/text"
             android:layout_marginBottom="12dp" />
@@ -70,7 +70,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_browse_meals"
+                    android:text="@string/home_browse_mealsBtn"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/text" />
@@ -78,7 +78,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_browse_meals_desc"
+                    android:text="@string/home_browse_mealsBtn_desc"
                     android:textSize="14sp"
                     android:textColor="@color/text"
                     android:layout_marginTop="4dp" />
@@ -126,7 +126,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ingredients"
+            android:text="@string/home_browse_ingredients"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary"
@@ -136,7 +136,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Browse ingredients and their nutritional values."
+            android:text="@string/home_browse_ingredientsDesc"
             android:textSize="12sp"
             android:textColor="@color/text"
             android:layout_marginBottom="12dp" />
@@ -163,7 +163,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Browse Ingredients"
+                    android:text="@string/home_browse_ingredientsBtn"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/text" />
@@ -171,7 +171,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Search by name, filter by organic, protein, price and more."
+                    android:text="@string/home_browse_ingredientsBtnDesc"
                     android:textSize="14sp"
                     android:textColor="@color/text"
                     android:layout_marginTop="4dp" />

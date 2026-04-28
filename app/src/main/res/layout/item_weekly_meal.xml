@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="Breakfast"
+                android:text="@string/plan_details_breakfast"
                 android:textStyle="bold"
                 android:textSize="12sp"
                 android:textColor="#FF9800" />
@@ -58,7 +58,7 @@
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="Lunch"
+                android:text="@string/plan_details_lunch"
                 android:textStyle="bold"
                 android:textSize="12sp"
                 android:textColor="#4CAF50" />
@@ -82,7 +82,7 @@
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="Dinner"
+                android:text="@string/plan_details_dinner"
                 android:textStyle="bold"
                 android:textSize="12sp"
                 android:textColor="#2196F3" />

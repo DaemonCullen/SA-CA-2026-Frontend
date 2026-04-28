@@ -96,7 +96,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Price"
+                            android:text="@string/ingredientsDetails_page_price"
                             android:textColor="@color/text"
                             android:textSize="12sp" />
 
@@ -126,7 +126,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Organic"
+                            android:text="@string/ingredientsDetails_page_organic"
                             android:textColor="@color/text"
                             android:textSize="12sp" />
 
@@ -156,7 +156,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Vegetarian"
+                            android:text="@string/ingredientsDetails_page_vegetarian"
                             android:textColor="@color/text"
                             android:textSize="12sp" />
 
@@ -178,7 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Nutrition Facts"
+                android:text="@string/ingredientsDetails_page_nutrition"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -213,7 +213,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Calories"
+                            android:text="@string/ingredientsDetails_page_calories"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -234,7 +234,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Protein"
+                            android:text="@string/ingredientsDetails_page_protein"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -255,7 +255,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Fats"
+                            android:text="@string/ingredientsDetails_page_fats"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -276,7 +276,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Carbs"
+                            android:text="@string/ingredientsDetails_page_carbs"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -297,7 +297,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Fiber"
+                            android:text="@string/ingredientsDetails_page_fiber"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -318,7 +318,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Sodium"
+                            android:text="@string/ingredientsDetails_page_sodium"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -330,7 +330,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Serving"
+                android:text="@string/ingredientsDetails_page_serving"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -351,7 +351,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Serving Size"
+                        android:text="@string/ingredientsDetails_page_servingSize"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -377,7 +377,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:text="Delete"
+                    android:text="@string/ingredientsDetails_page_delete"
                     android:backgroundTint="#F44336" />
 
                 <Button
@@ -385,7 +385,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Edit" />
+                    android:text="@string/ingredientsDetails_page_edit" />
             </LinearLayout>
 
         </LinearLayout>

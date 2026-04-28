@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meal Plans"
+            android:text="@string/plans_page_heading"
             android:textColor="@android:color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Create 7-day plans tailored to your goals"
+            android:text="@string/plans_page_heading_desc"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
     </LinearLayout>
@@ -45,7 +45,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Set Your Goals"
+            android:text="@string/plans_page_setGoals"
             android:textColor="?attr/colorPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -53,7 +53,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose: Muscle Building, Fat Loss, or General Health to get personalized meal plans."
+            android:text="@string/plans_page_setGoals_desc"
             android:textColor="@color/text"
             android:textSize="13sp"
             android:layout_marginTop="4dp" />
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:text="Your Plans"
+        android:text="@string/plans_page_yourPlans"
         android:textColor="@color/text"
         android:textStyle="bold"
         android:layout_marginStart="16dp"
@@ -74,7 +74,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tap a plan to view meals. Long press to delete."
+        android:text="@string/plans_page_yourPlans_desc"
         android:textSize="12sp"
         android:textColor="@color/text"
         android:layout_marginStart="16dp"
@@ -84,7 +84,7 @@
         android:id="@+id/btnCreatePlan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create New Plan"
+        android:text="@string/plans_page_create_planNew"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp" />
 

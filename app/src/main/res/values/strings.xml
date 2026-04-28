@@ -5,12 +5,18 @@
     <string name="home_page_title_button">Home</string>
     <string name="home_welcome">Healthy Meal Planner</string>
     <string name="home_welcome_message">Plan your weekly meals, track nutrition and achieve your health goals. Browse meals, create custom plans, and discover ingredients.</string>
-    <string name="home_browse_meals">Browse Meals</string>
+    <string name="home_browse_mealsBtn">Browse Meals</string>
     <string name="home_meal_plans">Meal Plans</string>
     <string name="home_settings">Settings</string>
-    <string name="home_browse_meals_desc">Discover new recipes and nutrition info</string>
+    <string name="home_browse_mealsBtn_desc">Discover new recipes and nutrition info</string>
     <string name="home_meal_plans_desc">View your weekly schedule and goals</string>
     <string name="home_settings_desc">Language, dark mode, and profile</string>
+    <string name="home_browse_meals">Browse Meals</string>
+    <string name="home_browse_mealsDesc">Explore hundreds of recipes filtered by calories, protein, difficulty and more.</string>
+    <string name="home_browse_ingredients">Ingredients</string>
+    <string name="home_browse_ingredientsDesc">Browse ingredients and their nutritional values.</string>
+    <string name="home_browse_ingredientsBtn">Browse Ingredients</string>
+    <string name="home_browse_ingredientsBtnDesc">Search by name, filter by organic, protein, price and more.</string>
     <!--  Meals Page  -->
     <string name="meals_page_title">Meals</string>
     <string name="meals_page_title_button">Meals</string>
@@ -40,6 +46,13 @@
     <string name="meals_filter_apply">Apply</string>
     <!--  Plans Page  -->
     <string name="plans_page_title">Plans</string>
+    <string name="plans_page_heading">Meal Plans</string>
+    <string name="plans_page_heading_desc">Create 7-day plans tailored to your goals</string>
+    <string name="plans_page_setGoals">Set Your Goals</string>
+    <string name="plans_page_setGoals_desc">Choose: Muscle Building, Fat Loss, or General Health to get personalized meal plans.</string>
+    <string name="plans_page_yourPlans">Your Plans</string>
+    <string name="plans_page_yourPlans_desc">Tap a plan to view meals. Long press to delete.</string>
+    <string name="plans_page_create_planNew">Create New Plan</string>
     <string name="plans_page_create_plan">Create Plan</string>
     <string name="plans_page_inputGoals">Input your Goals</string>
     <string name="plans_page_tapToTailor">Tap to get a plan tailored to you</string>
@@ -49,6 +62,7 @@
     <string name="plans_page_create">Create</string>
     <!--  Plan Details  -->
     <string name="plan_details_title">Weekly Plan</string>
+    <string name="plan_details_titleDesc">ap a meal to see details</string>
     <string name="plan_details_monday">Monday</string>
     <string name="plan_details_tuesday">Tuesday</string>
     <string name="plan_details_wednesday">Wednesday</string>
@@ -69,6 +83,44 @@
     <string name="goals_page_loseWeight">Lose Weight</string>
     <string name="goals_page_gainMuscle">Gain Muscle</string>
     <string name="goals_page_learnCooking">Learn Cooking</string>
+    <!--  Ingredients Page  -->
+    <string name="ingredients_page_title">Ingredients</string>
+    <string name="ingredients_page_heading">All Ingredients</string>
+    <string name="ingredients_page_heading_Desc">Search and filter ingredients</string>
+    <string name="ingredients_page_cheap">Cheap</string>
+    <string name="ingredients_page_highProtein">High Protein</string>
+    <string name="ingredients_page_lowFat">Low Fat"</string>
+    <!--  Ingredients Details Page  -->
+    <string name="ingredientsDetails_page_price">Price</string>
+    <string name="ingredientsDetails_page_organic">Organic</string>
+    <string name="ingredientsDetails_page_vegetarian">Vegetarian</string>
+    <string name="ingredientsDetails_page_nutrition">Nutrition Facts</string>
+    <string name="ingredientsDetails_page_calories">Calories</string>
+    <string name="ingredientsDetails_page_protein">Protein</string>
+    <string name="ingredientsDetails_page_fats">Fats</string>
+    <string name="ingredientsDetails_page_carbs">Carbs</string>
+    <string name="ingredientsDetails_page_fiber">Fiber</string>
+    <string name="ingredientsDetails_page_sodium">Sodium</string>
+    <string name="ingredientsDetails_page_serving">Serving</string>
+    <string name="ingredientsDetails_page_servingSize">Serving Size</string>
+    <string name="ingredientsDetails_page_delete">Delete</string>
+    <string name="ingredientsDetails_page_edit">Edit</string>
+    <string name="ingredientsDetails_page_cancel">Cancel</string>
+    <string name="ingredientsDetails_page_deleteIngredient">Delete Ingredient</string>
+    <string name="ingredientsDetails_page_deleteIngredient_desc">Are you sure you want to delete </string>
+    <string name="ingredientsDetails_page_editIngredient">Cancel</string>
+    <!--  Edit Ingredient Page  -->
+    <string name="editIngredient_dialog_edit">Edit Ingredient</string>
+    <string name="editIngredient_dialog_name">Ingredient Name</string>
+    <string name="editIngredient_dialog_origin">Origin</string>
+    <string name="editIngredient_dialog_price">Price ($)</string>
+    <string name="editIngredient_dialog_protein">Protein (g)</string>
+    <string name="editIngredient_dialog_fats">Fats (g)</string>
+    <string name="editIngredient_dialog_cancel">Cancel</string>
+    <string name="editIngredient_dialog_save">Save</string>
+    <string name="editIngredient_dialog_values">Please enter valid values</string>
+    <string name="editIngredient_dialog_updated">Ingredient updated</string>
+    <string name="editIngredient_dialog_failed">Failed to update</string>
     <!--  Settings Page  -->
     <string name="settings_page_title">Settings</string>
     <string name="settings_page_title_button">Settings</string>

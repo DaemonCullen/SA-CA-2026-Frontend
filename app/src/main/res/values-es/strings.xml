@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SA_CA_2026</string>
-    <!--  Home Page  -->
-    <string name="home_page_title">Página de Inicio</string>
+    <!-- Home Page -->
+    <string name="home_page_title">Página de inicio</string>
     <string name="home_page_title_button">Inicio</string>
     <string name="home_welcome">¡Bienvenido de nuevo!</string>
     <string name="home_welcome_message">¿Listo para comer saludable hoy?</string>
-    <string name="home_browse_meals">Explorar comidas</string>
+    <string name="home_browse_mealsBtn">Explorar comidas</string>
     <string name="home_meal_plans">Planes de comidas</string>
     <string name="home_settings">Configuración</string>
-    <string name="home_browse_meals_desc">Descubre nuevas recetas e información nutricional</string>
+    <string name="home_browse_mealsBtn_desc">Descubre nuevas recetas e información nutricional</string>
     <string name="home_meal_plans_desc">Consulta tu horario semanal y tus objetivos</string>
     <string name="home_settings_desc">Idioma, modo oscuro y perfil</string>
-    <!--  Meals Page  -->
-    <string name="meals_page_title">Página de Comidas</string>
+    <string name="home_browse_meals">Explorar comidas</string>
+    <string name="home_browse_mealsDesc">Explora cientos de recetas filtradas por calorías, proteínas, dificultad y más.</string>
+    <string name="home_browse_ingredients">Ingredientes</string>
+    <string name="home_browse_ingredientsDesc">Explora ingredientes y sus valores nutricionales.</string>
+    <string name="home_browse_ingredientsBtn">Explorar ingredientes</string>
+    <string name="home_browse_ingredientsBtnDesc">Busca por nombre, filtra por orgánico, proteínas, precio y más.</string>
+    <!-- Meals Page -->
+    <string name="meals_page_title">Página de comidas</string>
     <string name="meals_page_title_button">Comidas</string>
-    <string name="meals_search_bar">Sercho</string>
-    <string name="meals_filter">filtrar</string>
+    <string name="meals_search_bar">Buscar</string>
+    <string name="meals_filter">Filtrar</string>
     <string name="meals_back_button">Atrás</string>
     <string name="meals_addNewMeal">Añadir nueva comida</string>
-    <!--  Meals Page (Filter)  -->
+    <!-- Meals Page (Filter) -->
     <string name="meals_filter_chooseFilter">Elegir filtro</string>
     <string name="meals_filter_noFilter">Sin filtro</string>
     <string name="meals_filter_category">Categoría</string>
-    <string name="meals_filter_any">Any</string>
+    <string name="meals_filter_any">Cualquiera</string>
     <string name="meals_filter_breakfast">Desayuno</string>
     <string name="meals_filter_lunch">Almuerzo</string>
     <string name="meals_filter_dinner">Cena</string>
@@ -32,52 +38,98 @@
     <string name="meals_filter_medium">Media</string>
     <string name="meals_filter_hard">Difícil</string>
     <string name="meals_filter_Other">Otro</string>
-    <string name="meals_filter_proteinRange">Protein Range (g)</string>
+    <string name="meals_filter_proteinRange">Rango de proteínas (g)</string>
     <string name="meals_filter_proteinRangeValue">0g &#8211; 100g</string>
-    <string name="meals_filter_caloriesRange">Calories Range</string>
+    <string name="meals_filter_caloriesRange">Rango de calorías</string>
     <string name="meals_filter_caloriesRangeValue">0 &#8211; 2000</string>
-    <string name="meals_filter_clear">Clear</string>
-    <string name="meals_filter_cancel">Cancel</string>
-    <string name="meals_filter_apply">Apply</string>
-    <!--  Plans Page  -->
+    <string name="meals_filter_clear">Limpiar</string>
+    <string name="meals_filter_cancel">Cancelar</string>
+    <string name="meals_filter_apply">Aplicar</string>
+    <!-- Plans Page -->
     <string name="plans_page_title">Planes</string>
-    <string name="plans_page_create_plan">Crear Plan</string>
-    <string name="plans_page_inputGoals">Input your Goals</string>
-    <string name="plans_page_tapToTailor">Tap to get a plan tailored to you</string>
-    <string name="plans_page_planName">Plan name</string>
-    <string name="plans_page_description">Description (optional)</string>
-    <string name="plans_page_cancel">Cancel</string>
-    <string name="plans_page_create">Create</string>
-    <!--  Plan Details  -->
-    <string name="plan_details_title">Weekly Plan</string>
-    <string name="plan_details_monday">Monday</string>
-    <string name="plan_details_tuesday">Tuesday</string>
-    <string name="plan_details_wednesday">Wednesday</string>
-    <string name="plan_details_thursday">Thursday</string>
-    <string name="plan_details_friday">Friday</string>
-    <string name="plan_details_saturday">Saturday</string>
-    <string name="plan_details_sunday">Sunday</string>
-    <string name="plan_details_breakfast">Breakfast</string>
-    <string name="plan_details_lunch">Lunch</string>
-    <string name="plan_details_dinner">Dinner</string>
-    <string name="plan_details_noBreakfast">No breakfast meal matches</string>
-    <string name="plan_details_noLunch">No lunch meal matches</string>
-    <string name="plan_details_noDinner">No breakfast meal matches</string>
-    <string name="plan_details_mealName">Meal Name</string>
-    <!--  Goals Page  -->
-    <string name="goals_page_title">What is your goal?</string>
-    <string name="goals_page_title_desc">Choose one to get a personalised plan</string>
-    <string name="goals_page_loseWeight">Lose Weight</string>
-    <string name="goals_page_gainMuscle">Gain Muscle</string>
-    <string name="goals_page_learnCooking">Learn Cooking</string>
-    <!--  Settings Page  -->
-    <string name="settings_page_title">Página de Ajustes</string>
+    <string name="plans_page_heading">Planes de comidas</string>
+    <string name="plans_page_heading_desc">Crea planes de 7 días adaptados a tus objetivos</string>
+    <string name="plans_page_setGoals">Define tus objetivos</string>
+    <string name="plans_page_setGoals_desc">Elige: aumento de masa muscular, pérdida de grasa o salud general para obtener planes personalizados.</string>
+    <string name="plans_page_yourPlans">Tus planes</string>
+    <string name="plans_page_yourPlans_desc">Toca un plan para ver las comidas. Mantén pulsado para eliminar.</string>
+    <string name="plans_page_create_planNew">Crear nuevo plan</string>
+    <string name="plans_page_create_plan">Crear plan</string>
+    <string name="plans_page_inputGoals">Introduce tus objetivos</string>
+    <string name="plans_page_tapToTailor">Toca para obtener un plan personalizado</string>
+    <string name="plans_page_planName">Nombre del plan</string>
+    <string name="plans_page_description">Descripción (opcional)</string>
+    <string name="plans_page_cancel">Cancelar</string>
+    <string name="plans_page_create">Crear</string>
+    <!-- Plan Details -->
+    <string name="plan_details_title">Plan semanal</string>
+    <string name="plan_details_titleDesc">ap a meal to see details</string>
+    <string name="plan_details_monday">Lunes</string>
+    <string name="plan_details_tuesday">Martes</string>
+    <string name="plan_details_wednesday">Miércoles</string>
+    <string name="plan_details_thursday">Jueves</string>
+    <string name="plan_details_friday">Viernes</string>
+    <string name="plan_details_saturday">Sábado</string>
+    <string name="plan_details_sunday">Domingo</string>
+    <string name="plan_details_breakfast">Desayuno</string>
+    <string name="plan_details_lunch">Almuerzo</string>
+    <string name="plan_details_dinner">Cena</string>
+    <string name="plan_details_noBreakfast">No hay comidas de desayuno disponibles</string>
+    <string name="plan_details_noLunch">No hay comidas de almuerzo disponibles</string>
+    <string name="plan_details_noDinner">No hay comidas de cena disponibles</string>
+    <string name="plan_details_mealName">Nombre de la comida</string>
+    <!-- Goals Page -->
+    <string name="goals_page_title">¿Cuál es tu objetivo?</string>
+    <string name="goals_page_title_desc">Elige uno para obtener un plan personalizado</string>
+    <string name="goals_page_loseWeight">Perder peso</string>
+    <string name="goals_page_gainMuscle">Ganar músculo</string>
+    <string name="goals_page_learnCooking">Aprender a cocinar</string>
+    <!-- Ingredients Page -->
+    <string name="ingredients_page_title">Ingredientes</string>
+    <string name="ingredients_page_heading">Todos los ingredientes</string>
+    <string name="ingredients_page_heading_Desc">Busca y filtra ingredientes</string>
+    <string name="ingredients_page_cheap">Barato</string>
+    <string name="ingredients_page_highProtein">Alto en proteínas</string>
+    <string name="ingredients_page_lowFat">Bajo en grasa</string>
+    <!-- Ingredients Details Page -->
+    <string name="ingredientsDetails_page_price">Precio</string>
+    <string name="ingredientsDetails_page_organic">Orgánico</string>
+    <string name="ingredientsDetails_page_vegetarian">Vegetariano</string>
+    <string name="ingredientsDetails_page_nutrition">Información nutricional</string>
+    <string name="ingredientsDetails_page_calories">Calorías</string>
+    <string name="ingredientsDetails_page_protein">Proteínas</string>
+    <string name="ingredientsDetails_page_fats">Grasas</string>
+    <string name="ingredientsDetails_page_carbs">Carbohidratos</string>
+    <string name="ingredientsDetails_page_fiber">Fibra</string>
+    <string name="ingredientsDetails_page_sodium">Sodio</string>
+    <string name="ingredientsDetails_page_serving">Porción</string>
+    <string name="ingredientsDetails_page_servingSize">Tamaño de la porción</string>
+    <string name="ingredientsDetails_page_delete">Eliminar</string>
+    <string name="ingredientsDetails_page_edit">Editar</string>
+    <string name="ingredientsDetails_page_cancel">Cancelar</string>
+    <string name="ingredientsDetails_page_deleteIngredient">Eliminar ingrediente</string>
+    <string name="ingredientsDetails_page_deleteIngredient_desc">¿Seguro que deseas eliminar </string>
+    <string name="ingredientsDetails_page_editIngredient">Editar ingrediente</string>
+    <!-- Edit Ingredient Page -->
+    <string name="editIngredient_dialog_edit">Editar ingrediente</string>
+    <string name="editIngredient_dialog_name">Nombre del ingrediente</string>
+    <string name="editIngredient_dialog_origin">Origen</string>
+    <string name="editIngredient_dialog_price">Precio ($)</string>
+    <string name="editIngredient_dialog_protein">Proteínas (g)</string>
+    <string name="editIngredient_dialog_fats">Grasas (g)</string>
+    <string name="editIngredient_dialog_cancel">Cancelar</string>
+    <string name="editIngredient_dialog_save">Guardar</string>
+    <string name="editIngredient_dialog_values">Introduce valores válidos</string>
+    <string name="editIngredient_dialog_updated">Ingrediente actualizado</string>
+    <string name="editIngredient_dialog_failed">Error al actualizar</string>
+    <!-- Settings Page -->
+    <string name="settings_page_title">Configuración</string>
     <string name="settings_page_title_button">Ajustes</string>
-    <string name="dark_mode_text">Modo Oscuro</string>
-    <string name="dark_mode_icon_desc">Icono del Modo Oscuro</string>
+    <string name="dark_mode_text">Modo oscuro</string>
+    <string name="dark_mode_icon_desc">Icono del modo oscuro</string>
     <string name="settings_preferences_title">Preferencias</string>
-    <string name="language_text">Idiomas</string>
-    <string name="languages_icon_desc">Botón de Idiomas</string>
+    <string name="language_text">Idioma</string>
+    <string name="languages_icon_desc">Botón de idioma</string>
     <!--  Add meal_list and plans strings  -->
     <string name="meal_list">Lista de comidas</string>
 </resources>

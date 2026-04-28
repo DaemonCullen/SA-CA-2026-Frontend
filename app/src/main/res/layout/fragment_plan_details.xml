@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Tap a meal to see details"
+            android:text="@string/plan_details_titleDesc"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
     </LinearLayout>

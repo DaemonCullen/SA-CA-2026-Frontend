@@ -114,10 +114,10 @@ public class SingleIngredientFragment extends Fragment {
 
     private void showDeleteDialog() {
         new AlertDialog.Builder(requireContext())
-                .setTitle("Delete Ingredient")
-                .setMessage("Are you sure you want to delete " + currentIngredient.name + "?")
-                .setNegativeButton("Cancel", null)
-                .setPositiveButton("Delete", (dialog, which) -> deleteIngredient())
+                .setTitle(getString(R.string.ingredientsDetails_page_deleteIngredient))
+                .setMessage(getString(R.string.ingredientsDetails_page_deleteIngredient) + currentIngredient.name + "?")
+                .setNegativeButton(getString(R.string.ingredientsDetails_page_cancel), null)
+                .setPositiveButton(getString(R.string.ingredientsDetails_page_delete), (dialog, which) -> deleteIngredient())
                 .show();
     }
 
@@ -128,10 +128,10 @@ public class SingleIngredientFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(requireContext(), "Ingredient deleted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), getString(R.string.editIngredient_dialog_updated), Toast.LENGTH_SHORT).show();
                     requireActivity().getSupportFragmentManager().popBackStack();
                 } else {
-                    Toast.makeText(requireContext(), "Failed to delete", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), getString(R.string.editIngredient_dialog_failed), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -158,10 +158,10 @@ public class SingleIngredientFragment extends Fragment {
         editFats.setText(String.valueOf(currentIngredient.fats));
 
         new AlertDialog.Builder(requireContext())
-                .setTitle("Edit Ingredient")
+                .setTitle(getString(R.string.editIngredient_dialog_edit))
                 .setView(dialogView)
-                .setNegativeButton("Cancel", null)
-                .setPositiveButton("Save", (dialog, which) -> {
+                .setNegativeButton(getString(R.string.editIngredient_dialog_cancel), null)
+                .setPositiveButton(getString(R.string.editIngredient_dialog_save), (dialog, which) -> {
                     try {
                         currentIngredient.name = editName.getText().toString().trim();
                         currentIngredient.origin = editOrigin.getText().toString().trim();
@@ -171,7 +171,7 @@ public class SingleIngredientFragment extends Fragment {
 
                         updateIngredient();
                     } catch (Exception e) {
-                        Toast.makeText(requireContext(), "Please enter valid values", Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireContext(), getString(R.string.editIngredient_dialog_values), Toast.LENGTH_LONG).show();
                     }
                 })
                 .show();
@@ -186,9 +186,9 @@ public class SingleIngredientFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     currentIngredient = response.body();
                     displayIngredient(currentIngredient);
-                    Toast.makeText(requireContext(), "Ingredient updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), getString(R.string.editIngredient_dialog_updated), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(requireContext(), "Failed to update", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), getString(R.string.editIngredient_dialog_failed), Toast.LENGTH_SHORT).show();
                 }
             }
 

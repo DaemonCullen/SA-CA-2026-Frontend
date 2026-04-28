@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ingredient Name"
+        android:text="@string/editIngredient_dialog_name"
         android:textSize="12sp" />
 
     <EditText
@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Origin"
+        android:text="@string/editIngredient_dialog_origin"
         android:textSize="12sp" />
 
     <EditText
@@ -34,7 +34,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price ($)"
+        android:text="@string/editIngredient_dialog_price"
         android:textSize="12sp" />
 
     <EditText
@@ -48,7 +48,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Protein (g)"
+        android:text="@string/editIngredient_dialog_protein"
         android:textSize="12sp" />
 
     <EditText
@@ -62,7 +62,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fats (g)"
+        android:text="@string/editIngredient_dialog_fats"
         android:textSize="12sp" />
 
     <EditText

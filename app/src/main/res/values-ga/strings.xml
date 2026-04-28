@@ -6,12 +6,18 @@
     <string name="home_page_title_button">Baile</string>
     <string name="home_welcome">Fáilte ar ais!</string>
     <string name="home_welcome_message">Réidh le hithe go sláintiúil inniu?</string>
-    <string name="home_browse_meals">Brabhsáil Béilí</string>
+    <string name="home_browse_mealsBtn">Brabhsáil Béilí</string>
     <string name="home_meal_plans">Pleananna Béile</string>
     <string name="home_settings">Socruithe</string>
-    <string name="home_browse_meals_desc">Faigh oidis nua agus eolas cothaithe</string>
+    <string name="home_browse_mealsBtn_desc">Faigh oidis nua agus eolas cothaithe</string>
     <string name="home_meal_plans_desc">Féach ar do sceideal seachtainiúil agus do spriocanna</string>
     <string name="home_settings_desc">Teanga, mód dorcha, agus próifíl</string>
+    <string name="home_browse_meals">Brabhsáil béilí</string>
+    <string name="home_browse_mealsDesc">Brabhsáil na céadta oideas scagtha de réir calraí, próitéine, deacrachta agus níos mó.</string>
+    <string name="home_browse_ingredients">Comhábhair</string>
+    <string name="home_browse_ingredientsDesc">Brabhsáil comhábhair agus a luachanna cothaithe.</string>
+    <string name="home_browse_ingredientsBtn">Brabhsáil comhábhair</string>
+    <string name="home_browse_ingredientsBtnDesc">Cuardaigh de réir ainm, scag de réir orgánach, próitéine, praghais agus níos mó.</string>
     <!--  Meals Page  -->
     <string name="meals_page_title">Leathanach Béilí</string>
     <string name="meals_page_title_button">Béilí</string>
@@ -41,6 +47,13 @@
     <string name="meals_filter_apply">Apply</string>
     <!--  Plans Page  -->
     <string name="plans_page_title">Pleananna</string>
+    <string name="plans_page_heading">Pleananna béilí</string>
+    <string name="plans_page_heading_desc">Cruthaigh pleananna 7 lá atá oiriúnaithe do do spriocanna</string>
+    <string name="plans_page_setGoals">Socraigh do spriocanna</string>
+    <string name="plans_page_setGoals_desc">Roghnaigh: tógáil matáin, cailliúint saille, nó sláinte ghinearálta chun pleananna pearsantaithe a fháil.</string>
+    <string name="plans_page_yourPlans">Do phleananna</string>
+    <string name="plans_page_yourPlans_desc">Tapáil plean chun béilí a fheiceáil. Coinnigh síos chun é a scriosadh.</string>
+    <string name="plans_page_create_planNew">Cruthaigh plean nua</string>
     <string name="plans_page_create_plan">Cruthaigh Plean</string>
     <string name="plans_page_inputGoals">Cuir Isteach do Sproiceanna</string>
     <string name="plans_page_tapToTailor">Tapáil chun plean a fháil atá saincheaptha duitse</string>
@@ -49,27 +62,66 @@
     <string name="plans_page_cancel">Cuir ar ceal</string>
     <string name="plans_page_create">Cruthaigh</string>
     <!--  Plan Details  -->
-    <string name="plan_details_title">Weekly Plan</string>
-    <string name="plan_details_monday">Monday</string>
-    <string name="plan_details_tuesday">Tuesday</string>
-    <string name="plan_details_wednesday">Wednesday</string>
-    <string name="plan_details_thursday">Thursday</string>
-    <string name="plan_details_friday">Friday</string>
-    <string name="plan_details_saturday">Saturday</string>
-    <string name="plan_details_sunday">Sunday</string>
-    <string name="plan_details_breakfast">Breakfast</string>
-    <string name="plan_details_lunch">Lunch</string>
-    <string name="plan_details_dinner">Dinner</string>
-    <string name="plan_details_noBreakfast">No breakfast meal matches</string>
-    <string name="plan_details_noLunch">No lunch meal matches</string>
-    <string name="plan_details_noDinner">No breakfast meal matches</string>
-    <string name="plan_details_mealName">Meal Name</string>
+    <string name="plan_details_title">Plean seachtainiúil</string>
+    <string name="plan_details_titleDesc">ap a meal to see details</string>
+    <string name="plan_details_monday">Dé Luain</string>
+    <string name="plan_details_tuesday">Dé Máirt</string>
+    <string name="plan_details_wednesday">Dé Céadaoin</string>
+    <string name="plan_details_thursday">Déardaoin</string>
+    <string name="plan_details_friday">Dé hAoine</string>
+    <string name="plan_details_saturday">Dé Sathairn</string>
+    <string name="plan_details_sunday">Dé Domhnaigh</string>
+    <string name="plan_details_breakfast">Bricfeasta</string>
+    <string name="plan_details_lunch">Lón</string>
+    <string name="plan_details_dinner">Dinnéar</string>
+    <string name="plan_details_noBreakfast">Níl aon bhéile bricfeasta ar fáil</string>
+    <string name="plan_details_noLunch">Níl aon bhéile lóin ar fáil</string>
+    <string name="plan_details_noDinner">Níl aon bhéile dinnéir ar fáil</string>
+    <string name="plan_details_mealName">Ainm an bhéile</string>
     <!--  Goals Page  -->
     <string name="goals_page_title">Cad é do sprioc</string>
     <string name="goals_page_title_desc">Pioc ceann amháin chun plean pearsanta afháil</string>
     <string name="goals_page_loseWeight">Cailleadh Meáchain</string>
     <string name="goals_page_gainMuscle">Faigh Matán</string>
     <string name="goals_page_learnCooking">Cócaráil a Fhoghlaim</string>
+    <!-- Ingredients Page -->
+    <string name="ingredients_page_title">Comhábhair</string>
+    <string name="ingredients_page_heading">Gach comhábhar</string>
+    <string name="ingredients_page_heading_Desc">Cuardaigh agus scag comhábhair</string>
+    <string name="ingredients_page_cheap">Saor</string>
+    <string name="ingredients_page_highProtein">Ardphróitéin</string>
+    <string name="ingredients_page_lowFat">Íseal i saill</string>
+    <!-- Ingredients Details Page -->
+    <string name="ingredientsDetails_page_price">Praghas</string>
+    <string name="ingredientsDetails_page_organic">Orgánach</string>
+    <string name="ingredientsDetails_page_vegetarian">Veigeatóir</string>
+    <string name="ingredientsDetails_page_nutrition">Faisnéis chothaithe</string>
+    <string name="ingredientsDetails_page_calories">Calraí</string>
+    <string name="ingredientsDetails_page_protein">Próitéin</string>
+    <string name="ingredientsDetails_page_fats">Saillte</string>
+    <string name="ingredientsDetails_page_carbs">Carbaihiodráití</string>
+    <string name="ingredientsDetails_page_fiber">Snáithín</string>
+    <string name="ingredientsDetails_page_sodium">Sóidiam</string>
+    <string name="ingredientsDetails_page_serving">Riar</string>
+    <string name="ingredientsDetails_page_servingSize">Méid riar</string>
+    <string name="ingredientsDetails_page_delete">Scrios</string>
+    <string name="ingredientsDetails_page_edit">Cuir in eagar</string>
+    <string name="ingredientsDetails_page_cancel">Cealaigh</string>
+    <string name="ingredientsDetails_page_deleteIngredient">Scrios comhábhar</string>
+    <string name="ingredientsDetails_page_deleteIngredient_desc">An bhfuil tú cinnte gur mian leat </string>
+    <string name="ingredientsDetails_page_editIngredient">Cuir comhábhar in eagar</string>
+    <!-- Edit Ingredient Page -->
+    <string name="editIngredient_dialog_edit">Cuir comhábhar in eagar</string>
+    <string name="editIngredient_dialog_name">Ainm an chomhábhair</string>
+    <string name="editIngredient_dialog_origin">Bunús</string>
+    <string name="editIngredient_dialog_price">Praghas ($)</string>
+    <string name="editIngredient_dialog_protein">Próitéin (g)</string>
+    <string name="editIngredient_dialog_fats">Saillte (g)</string>
+    <string name="editIngredient_dialog_cancel">Cealaigh</string>
+    <string name="editIngredient_dialog_save">Sábháil</string>
+    <string name="editIngredient_dialog_values">Iontráil luachanna bailí</string>
+    <string name="editIngredient_dialog_updated">Comhábhar nuashonraithe</string>
+    <string name="editIngredient_dialog_failed">Theip ar nuashonrú</string>
     <!--  Settings Page  -->
     <string name="settings_page_title">Leathanach Socruithe</string>
     <string name="settings_page_title_button">Socruithe</string>

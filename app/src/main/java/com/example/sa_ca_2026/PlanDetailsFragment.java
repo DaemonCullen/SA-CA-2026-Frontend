@@ -207,9 +207,23 @@ public class PlanDetailsFragment extends Fragment {
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             WeeklyMeal item = meals.get(position);
             holder.dayText.setText(item.day);
-            bindMealSlot(holder.breakfastText, item.breakfast, "No breakfast meal matches");
-            bindMealSlot(holder.lunchText,     item.lunch,     "No lunch meal matches");
-            bindMealSlot(holder.dinnerText,    item.dinner,    "No dinner meal matches");
+            bindMealSlot(
+                    holder.breakfastText,
+                    item.breakfast,
+                    holder.itemView.getContext().getString(R.string.plan_details_noBreakfast)
+            );
+
+            bindMealSlot(
+                    holder.lunchText,
+                    item.lunch,
+                    holder.itemView.getContext().getString(R.string.plan_details_noLunch)
+            );
+
+            bindMealSlot(
+                    holder.dinnerText,
+                    item.dinner,
+                    holder.itemView.getContext().getString(R.string.plan_details_noDinner)
+            );
         }
 
         private void bindMealSlot(TextView view, Meal meal, String placeholder) {
