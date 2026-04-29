@@ -13,10 +13,13 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="IngredientsE2ETests">
+      <SelectionState runConfigName="PlansE2ETests">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="PlansE2ETests">
+      <SelectionState runConfigName="MealsE2ETest">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="IngredientsE2ETests">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

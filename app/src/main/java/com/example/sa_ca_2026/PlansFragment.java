@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,7 +36,7 @@ public class PlansFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         listViewPlans = view.findViewById(R.id.listViewPlans);
@@ -60,15 +61,21 @@ public class PlansFragment extends Fragment {
 
         loadPlans();
 
-        view.findViewById(R.id.bannerInputGoals).setOnClickListener(v -> {
-            getParentFragmentManager().beginTransaction()
-                    .replace(R.id.frame_layout, new GoalsFragment())
-                    .addToBackStack(null)
-                    .commit();
-        });
+        // Check if bannerInputGoals exists before setting listener
+        View banner = view.findViewById(R.id.bannerInputGoals);
+        if (banner != null) {
+            banner.setOnClickListener(v -> {
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.frame_layout, new GoalsFragment())
+                        .addToBackStack(null)
+                        .commit();
+            });
+        }
 
         Button btnCreatePlan = view.findViewById(R.id.btnCreatePlan);
-        btnCreatePlan.setOnClickListener(v -> showCreateDialog());
+        if (btnCreatePlan != null) {
+            btnCreatePlan.setOnClickListener(v -> showCreateDialog());
+        }
     }
 
     // ── READ ──────────────────────────────────────────────────────────────────
@@ -78,18 +85,22 @@ public class PlansFragment extends Fragment {
         api.getAllPlans().enqueue(new Callback<List<Plan>>() {
             @Override
             public void onResponse(@NonNull Call<List<Plan>> call, @NonNull Response<List<Plan>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    plans.clear();
-                    plans.addAll(response.body());
-                    adapter.notifyDataSetChanged();
-                } else {
-                    Toast.makeText(getContext(), "Failed to load plans", Toast.LENGTH_SHORT).show();
+                if (isAdded() && getContext() != null) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        plans.clear();
+                        plans.addAll(response.body());
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(getContext(), "Failed to load plans", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Plan>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                if (isAdded() && getContext() != null) {
+                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -103,7 +114,6 @@ public class PlansFragment extends Fragment {
         EditText descInput = new EditText(getContext());
         descInput.setHint(getString(R.string.plans_page_description));
 
-        // stack the two inputs vertically inside the dialog
         android.widget.LinearLayout layout = new android.widget.LinearLayout(getContext());
         layout.setOrientation(android.widget.LinearLayout.VERTICAL);
         layout.setPadding(48, 16, 48, 0);
@@ -135,18 +145,22 @@ public class PlansFragment extends Fragment {
         api.createPlan(newPlan).enqueue(new Callback<Plan>() {
             @Override
             public void onResponse(@NonNull Call<Plan> call, @NonNull Response<Plan> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    plans.add(response.body());          // add the DB version (has real id)
-                    adapter.notifyItemInserted(plans.size() - 1);
-                    Toast.makeText(getContext(), "Plan created", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), "Failed to create plan", Toast.LENGTH_SHORT).show();
+                if (isAdded() && getContext() != null) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        plans.add(response.body());
+                        adapter.notifyItemInserted(plans.size() - 1);
+                        Toast.makeText(getContext(), "Plan created", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Failed to create plan", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Plan> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                if (isAdded() && getContext() != null) {
+                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -167,19 +181,25 @@ public class PlansFragment extends Fragment {
         api.deletePlan(plan.id).enqueue(new Callback<Plan>() {
             @Override
             public void onResponse(@NonNull Call<Plan> call, @NonNull Response<Plan> response) {
-                if (response.isSuccessful()) {
-                    int pos = plans.indexOf(plan);
-                    plans.remove(plan);
-                    adapter.notifyItemRemoved(pos);
-                    Toast.makeText(getContext(), "Plan deleted", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), "Failed to delete plan", Toast.LENGTH_SHORT).show();
+                if (isAdded() && getContext() != null) {
+                    if (response.isSuccessful()) {
+                        int pos = plans.indexOf(plan);
+                        if (pos != -1) {
+                            plans.remove(pos);
+                            adapter.notifyItemRemoved(pos);
+                        }
+                        Toast.makeText(getContext(), "Plan deleted", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Failed to delete plan", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Plan> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                if (isAdded() && getContext() != null) {
+                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

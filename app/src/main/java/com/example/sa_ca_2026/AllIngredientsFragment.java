@@ -5,20 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,282 +25,212 @@ import retrofit2.Response;
 public class AllIngredientsFragment extends Fragment {
 
     private ListView listView;
-    private SearchView searchView;
-    private Spinner filterSpinner;
     private ArrayAdapter<String> adapter;
-    private ArrayList<Ingredient> allIngredientsList = new ArrayList<>();
-    private ArrayList<String> displayedNames = new ArrayList<>();
-
-    private Button btnCheapIngredients, btnHighProtein, btnLowFat;
+    private List<Ingredient> ingredientsList = new ArrayList<>();
+    private List<String> displayedNames = new ArrayList<>();
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_ingredients, container, false);
 
         listView = view.findViewById(R.id.ingredientsListView);
-        searchView = view.findViewById(R.id.ingredientSearchView);
-        filterSpinner = view.findViewById(R.id.ingredientFilterSpinner);
-
-        btnCheapIngredients = view.findViewById(R.id.btnCheapIngredients);
-        btnHighProtein = view.findViewById(R.id.btnHighProtein);
-        btnLowFat = view.findViewById(R.id.btnLowFat);
 
         adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, displayedNames);
         listView.setAdapter(adapter);
 
-        setupFilterSpinner();
-        setupSearch();
-        setupButtons();
-        setupListClick();
+        listView.setOnItemClickListener((parent, v, position, id) -> {
+            Ingredient selected = ingredientsList.get(position);
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.frame_layout, SingleIngredientFragment.newInstance(selected.id))
+                    .addToBackStack(null)
+                    .commit();
+        });
 
-        loadAllIngredients();
+        Spinner filterSpinner = view.findViewById(R.id.ingredientFilterSpinner);
+        String[] filterOptions = {"All", "Organic", "Non-Organic"};
+        ArrayAdapter<String> filterAdapter = new ArrayAdapter<>(requireContext(),
+                android.R.layout.simple_spinner_item, filterOptions);
+        filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterSpinner.setAdapter(filterAdapter);
+
+        View btnCheap = view.findViewById(R.id.btnCheapIngredients);
+        if (btnCheap != null) {
+            btnCheap.setOnClickListener(v -> showCheapFilterDialog());
+        }
+
+        View btnHighProtein = view.findViewById(R.id.btnHighProtein);
+        if (btnHighProtein != null) {
+            btnHighProtein.setOnClickListener(v -> showHighProteinFilterDialog());
+        }
+
+        View btnLowFat = view.findViewById(R.id.btnLowFat);
+        if (btnLowFat != null) {
+            btnLowFat.setOnClickListener(v -> showLowFatFilterDialog());
+        }
+
+        loadIngredients();
 
         return view;
     }
 
-    private void setupButtons() {
-        btnCheapIngredients.setOnClickListener(v -> showPriceDialog("cheap"));
-        btnHighProtein.setOnClickListener(v -> showPriceDialog("protein"));
-        btnLowFat.setOnClickListener(v -> showPriceDialog("fat"));
+    private void loadIngredients() {
+        IngredientsApi api = RetrofitClient.getClient().create(IngredientsApi.class);
+        api.getAllIngredients().enqueue(new Callback<List<Ingredient>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Ingredient>> call, @NonNull Response<List<Ingredient>> response) {
+                if (isAdded() && getContext() != null) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        ingredientsList.clear();
+                        ingredientsList.addAll(response.body());
+                        updateList();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Ingredient>> call, @NonNull Throwable t) {
+                if (isAdded() && getContext() != null) {
+                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
-    private void showPriceDialog(String filterType) {
-        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_filter_number, null);
-        EditText editNumber = dialogView.findViewById(R.id.editFilterNumber);
-
-        String title, hint;
-        if (filterType.equals("cheap")) {
-            title = "Max Price";
-            hint = "e.g., 20";
-        } else if (filterType.equals("protein")) {
-            title = "Min Protein";
-            hint = "e.g., 20";
-        } else {
-            title = "Max Fat";
-            hint = "e.g., 10";
+    private void updateList() {
+        displayedNames.clear();
+        for (Ingredient i : ingredientsList) {
+            displayedNames.add(i.name + " - " + i.origin + " ($" + i.price + ")");
         }
+        adapter.notifyDataSetChanged();
+    }
 
-        new AlertDialog.Builder(requireContext())
-                .setTitle("Filter by " + title)
-                .setView(dialogView)
-                .setNegativeButton("Cancel", null)
-                .setPositiveButton("Filter", (dialog, which) -> {
-                    try {
-                        double value = Double.parseDouble(editNumber.getText().toString().trim());
-                        if (filterType.equals("cheap")) {
-                            filterByMaxPrice(value);
-                        } else if (filterType.equals("protein")) {
-                            filterByMinProtein(value);
-                        } else {
-                            filterByMinFat(value);
+    private void showCheapFilterDialog() {
+        EditText input = new EditText(getContext());
+        input.setHint("Max Price");
+        new AlertDialog.Builder(getContext())
+                .setTitle("Filter by Max Price")
+                .setView(input)
+                .setPositiveButton("Search", (dialog, which) -> {
+                    String val = input.getText().toString();
+                    if (!val.isEmpty()) {
+                        try {
+                            filterByPrice(Double.parseDouble(val));
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(getContext(), "Please enter a valid number", Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e) {
-                        Toast.makeText(requireContext(), "Please enter a valid number", Toast.LENGTH_SHORT).show();
                     }
                 })
+                .setNegativeButton("Cancel", null)
                 .show();
     }
 
-    private void filterByMaxPrice(double maxPrice) {
+    private void filterByPrice(double price) {
         IngredientsApi api = RetrofitClient.getClient().create(IngredientsApi.class);
-        api.getIngredientsByMaxPrice(maxPrice).enqueue(new Callback<java.util.List<Ingredient>>() {
+        api.getIngredientsByMaxPrice(price).enqueue(new Callback<List<Ingredient>>() {
             @Override
-            public void onResponse(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Response<java.util.List<Ingredient>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    allIngredientsList.clear();
-                    allIngredientsList.addAll(response.body());
-                    updateAdapter();
-                    Toast.makeText(getContext(), "Found " + response.body().size() + " ingredients", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void filterByMinProtein(double minProtein) {
-        IngredientsApi api = RetrofitClient.getClient().create(IngredientsApi.class);
-        api.getIngredientsByMinProtein(minProtein).enqueue(new Callback<java.util.List<Ingredient>>() {
-            @Override
-            public void onResponse(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Response<java.util.List<Ingredient>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    allIngredientsList.clear();
-                    allIngredientsList.addAll(response.body());
-                    updateAdapter();
-                    Toast.makeText(getContext(), "Found " + response.body().size() + " ingredients", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void filterByMinFat(double minFat) {
-        IngredientsApi api = RetrofitClient.getClient().create(IngredientsApi.class);
-        api.getIngredientsByMinFat(minFat).enqueue(new Callback<java.util.List<Ingredient>>() {
-            @Override
-            public void onResponse(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Response<java.util.List<Ingredient>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    allIngredientsList.clear();
-                    allIngredientsList.addAll(response.body());
-                    updateAdapter();
-                    Toast.makeText(getContext(), "Found " + response.body().size() + " ingredients", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void setupFilterSpinner() {
-        String[] filterOptions = {"All", "Organic", "Non-Organic"};
-        ArrayAdapter<String> filterAdapter = new ArrayAdapter<>(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                filterOptions
-        );
-        filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        filterSpinner.setAdapter(filterAdapter);
-
-        filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filterIngredients(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-    }
-
-    private void setupSearch() {
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                searchIngredients(query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (newText.isEmpty()) {
-                    loadAllIngredients();
-                }
-                return true;
-            }
-        });
-    }
-
-    private void setupListClick() {
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            Ingredient ingredient = allIngredientsList.get(position);
-            Fragment detailFragment = SingleIngredientFragment.newInstance(ingredient.id);
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_layout, detailFragment)
-                    .addToBackStack(null)
-                    .commit();
-        });
-    }
-
-    private void loadAllIngredients() {
-        IngredientsApi api = RetrofitClient.getClient().create(IngredientsApi.class);
-
-        api.getAllIngredients().enqueue(new Callback<java.util.List<Ingredient>>() {
-            @Override
-            public void onResponse(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Response<java.util.List<Ingredient>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    allIngredientsList.clear();
-                    allIngredientsList.addAll(response.body());
-                    updateAdapter();
-                } else {
-                    Toast.makeText(getContext(), "Failed to load ingredients", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void searchIngredients(String query) {
-        IngredientsApi api = RetrofitClient.getClient().create(IngredientsApi.class);
-
-        api.getIngredientByName(query).enqueue(new Callback<java.util.List<Ingredient>>() {
-            @Override
-            public void onResponse(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Response<java.util.List<Ingredient>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    allIngredientsList.clear();
-                    allIngredientsList.addAll(response.body());
-                    updateAdapter();
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void filterIngredients(int filterType) {
-        IngredientsApi api = RetrofitClient.getClient().create(IngredientsApi.class);
-
-        if (filterType == 1) {
-            api.getOrganic(true).enqueue(new Callback<java.util.List<Ingredient>>() {
-                @Override
-                public void onResponse(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Response<java.util.List<Ingredient>> response) {
+            public void onResponse(@NonNull Call<List<Ingredient>> call, @NonNull Response<List<Ingredient>> response) {
+                if (isAdded() && getContext() != null) {
                     if (response.isSuccessful() && response.body() != null) {
-                        allIngredientsList.clear();
-                        allIngredientsList.addAll(response.body());
-                        updateAdapter();
+                        ingredientsList.clear();
+                        ingredientsList.addAll(response.body());
+                        updateList();
                     }
                 }
+            }
 
-                @Override
-                public void onFailure(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Throwable t) {
-                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            @Override
+            public void onFailure(@NonNull Call<List<Ingredient>> call, @NonNull Throwable t) {
+                if (isAdded() && getContext() != null) {
+                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            });
-        } else if (filterType == 2) {
-            api.getOrganic(false).enqueue(new Callback<java.util.List<Ingredient>>() {
-                @Override
-                public void onResponse(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Response<java.util.List<Ingredient>> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        allIngredientsList.clear();
-                        allIngredientsList.addAll(response.body());
-                        updateAdapter();
-                    }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<java.util.List<Ingredient>> call, @NonNull Throwable t) {
-                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-        } else {
-            loadAllIngredients();
-        }
+            }
+        });
     }
 
-    private void updateAdapter() {
-        displayedNames.clear();
-        for (Ingredient ing : allIngredientsList) {
-            displayedNames.add(ing.name + " - " + ing.origin + " ($" + ing.price + ")");
-        }
-        adapter.notifyDataSetChanged();
+    private void showHighProteinFilterDialog() {
+        EditText input = new EditText(getContext());
+        input.setHint("Min Protein");
+        new AlertDialog.Builder(getContext())
+                .setTitle("Filter by Min Protein")
+                .setView(input)
+                .setPositiveButton("Search", (dialog, which) -> {
+                    String val = input.getText().toString();
+                    if (!val.isEmpty()) {
+                        try {
+                            filterByProtein(Double.parseDouble(val));
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(getContext(), "Please enter a valid number", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void filterByProtein(double protein) {
+        IngredientsApi api = RetrofitClient.getClient().create(IngredientsApi.class);
+        api.getIngredientsByMinProtein(protein).enqueue(new Callback<List<Ingredient>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Ingredient>> call, @NonNull Response<List<Ingredient>> response) {
+                if (isAdded() && getContext() != null) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        ingredientsList.clear();
+                        ingredientsList.addAll(response.body());
+                        updateList();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Ingredient>> call, @NonNull Throwable t) {
+                if (isAdded() && getContext() != null) {
+                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void showLowFatFilterDialog() {
+        EditText input = new EditText(getContext());
+        input.setHint("Max Fat");
+        new AlertDialog.Builder(getContext())
+                .setTitle("Filter by Max Fat")
+                .setView(input)
+                .setPositiveButton("Search", (dialog, which) -> {
+                    String val = input.getText().toString();
+                    if (!val.isEmpty()) {
+                        try {
+                            filterByFat(Double.parseDouble(val));
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(getContext(), "Please enter a valid number", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void filterByFat(double fat) {
+        IngredientsApi api = RetrofitClient.getClient().create(IngredientsApi.class);
+        api.getIngredientsByMinFat(fat).enqueue(new Callback<List<Ingredient>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Ingredient>> call, @NonNull Response<List<Ingredient>> response) {
+                if (isAdded() && getContext() != null) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        ingredientsList.clear();
+                        ingredientsList.addAll(response.body());
+                        updateList();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Ingredient>> call, @NonNull Throwable t) {
+                if (isAdded() && getContext() != null) {
+                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
